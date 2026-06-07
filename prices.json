@@ -1,29 +1,436 @@
 {
-  "date": "2026-06-08",
-  "source": "DA Weekly Average Prices",
+  "date": "2026-06-07",
+  "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
   "store_name": "WalterMart",
   "store_url": "https://www.waltermartdelivery.com.ph/",
-  "updated_at": "2026-06-08T05:00:00+08:00",
+  "updated_at": "2026-06-07T18:01:54+00:00",
   "items": [
-    { "category": "Rice", "product": "Regular Milled Rice", "price": 45.00, "unit": "kg", "store_name": "WalterMart", "store_product": "Rej Regular Milled Rice | 5kg", "store_price": 48.00, "diff_pct": 6.7 },
-    { "category": "Rice", "product": "Well-Milled Rice", "price": 49.74, "unit": "kg", "store_name": "WalterMart", "store_product": "Everyday Well Milled Rice | 5kg", "store_price": 65.45, "diff_pct": 31.6 },
-    { "category": "Rice", "product": "Special Rice", "price": 60.30, "unit": "kg" },
-    { "category": "Pork", "product": "Kasim", "price": 345.55, "unit": "kg", "store_name": "WalterMart", "store_product": "Cabanatuan Meat Products Pork Kasim | kg", "store_price": 345.00, "diff_pct": -0.2 },
-    { "category": "Pork", "product": "Liempo", "price": 399.87, "unit": "kg", "store_name": "WalterMart", "store_product": "W Prime Meats Pork Sliced Belly | kg", "store_price": 365.00, "diff_pct": -8.7 },
-    { "category": "Beef", "product": "Beef Brisket", "price": 444.53, "unit": "kg", "store_name": "WalterMart", "store_product": "W Prime Meats Beef Brisket | kg", "store_price": 470.00, "diff_pct": 5.7 },
-    { "category": "Beef", "product": "Beef Rump (Camto)", "price": 495.13, "unit": "kg", "store_name": "WalterMart", "store_product": "Mrs. Garcia's Beef Camto | kg", "store_price": 609.00, "diff_pct": 23.0 },
-    { "category": "Chicken", "product": "Whole Chicken", "price": 199.16, "unit": "kg", "store_name": "WalterMart", "store_product": "Whole Chicken | kg", "store_price": 195.00, "diff_pct": -2.1 },
-    { "category": "Fish", "product": "Bangus", "price": 249.88, "unit": "kg", "store_name": "WalterMart", "store_product": "Fishta Marinated Boneless Bangus Vacuum Pack | kg", "store_price": 410.00, "diff_pct": 64.1 },
-    { "category": "Fish", "product": "Tilapia", "price": 154.24, "unit": "kg", "store_name": "WalterMart", "store_product": "WalterMart Fresh Tilapia Large | kg", "store_price": 159.00, "diff_pct": 3.1 },
-    { "category": "Fish", "product": "Galunggong", "price": 232.30, "unit": "kg", "store_name": "WalterMart", "store_product": "Fishta Galunggong Big | kg", "store_price": 425.00, "diff_pct": 83.0 },
-    { "category": "Vegetables", "product": "Ampalaya", "price": 126.60, "unit": "kg", "store_name": "WalterMart", "store_product": "WalterMart Ampalaya (Bitter Gourd) | kg", "store_price": 135.00, "diff_pct": 6.6 },
-    { "category": "Vegetables", "product": "Tomato", "price": 67.38, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Native Tomato | kg", "store_price": 130.00, "diff_pct": 92.9 },
-    { "category": "Vegetables", "product": "Sitaw", "price": 117.26, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Sitaw | kg", "store_price": 250.00, "diff_pct": 113.2 },
-    { "category": "Fruits", "product": "Banana (Lakatan)", "price": 98.49, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Banana Lacatan | kg", "store_price": 160.00, "diff_pct": 62.5 },
-    { "category": "Fruits", "product": "Papaya", "price": 73.40, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Red Lady Papaya | kg", "store_price": 100.00, "diff_pct": 36.2 },
-    { "category": "Fruits", "product": "Mango (Carabao)", "price": 148.96, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Mango Sapadera | kg", "store_price": 200.00, "diff_pct": 34.3 },
-    { "category": "Eggs", "product": "Chicken Eggs (Medium)", "price": 7.98, "unit": "piece", "store_name": "WalterMart", "store_product": "EggSakto Medium Eggs | 12s", "store_price": 9.83, "diff_pct": 23.2 },
-    { "category": "Eggs", "product": "Chicken Eggs (Large)", "price": 8.59, "unit": "piece", "store_name": "WalterMart", "store_product": "Bounty Fresh Medium Premium Eggs | 12s", "store_price": 10.67, "diff_pct": 24.2 }
+    {
+      "category": "Rice",
+      "product": "Premium",
+      "price": 50.83,
+      "unit": "50.83"
+    },
+    {
+      "category": "Rice",
+      "product": "Well Milled",
+      "price": 48.0,
+      "unit": "48.00"
+    },
+    {
+      "category": "Rice",
+      "product": "Regular Milled",
+      "price": 42.5,
+      "unit": "42.50"
+    },
+    {
+      "category": "Rice",
+      "product": "Premium",
+      "price": 54.78,
+      "unit": "54.78"
+    },
+    {
+      "category": "Rice",
+      "product": "Well Milled",
+      "price": 49.73,
+      "unit": "49.73"
+    },
+    {
+      "category": "Rice",
+      "product": "Regular Milled",
+      "price": 44.95,
+      "unit": "44.95"
+    },
+    {
+      "category": "Corn",
+      "product": "Mungbean",
+      "price": 146.91,
+      "unit": "146.91"
+    },
+    {
+      "category": "Fish",
+      "product": "Alumahan (Indian Mackerel)",
+      "price": 318.6,
+      "unit": "318.60"
+    },
+    {
+      "category": "Fish",
+      "product": "Bangus, Large",
+      "price": 250.87,
+      "unit": "250.87"
+    },
+    {
+      "category": "Fish",
+      "product": "Bangus, Medium",
+      "price": 230.14,
+      "unit": "230.14"
+    },
+    {
+      "category": "Fish",
+      "product": "Galunggong, Local",
+      "price": 244.75,
+      "unit": "244.75"
+    },
+    {
+      "category": "Fish",
+      "product": "Tanigue",
+      "price": 644.44,
+      "unit": "644.44"
+    },
+    {
+      "category": "Fish",
+      "product": "Pampano, Local",
+      "price": 416.67,
+      "unit": "416.67"
+    },
+    {
+      "category": "Fish",
+      "product": "Pampano, Imported",
+      "price": 408.82,
+      "unit": "408.82"
+    },
+    {
+      "category": "Fish",
+      "product": "Salmon Belly, Imported",
+      "price": 403.56,
+      "unit": "403.56"
+    },
+    {
+      "category": "Fish",
+      "product": "Salmon Head, Imported",
+      "price": 216.23,
+      "unit": "216.23"
+    },
+    {
+      "category": "Fish",
+      "product": "Sardines (Tamban)",
+      "price": 147.5,
+      "unit": "147.50"
+    },
+    {
+      "category": "Fish",
+      "product": "Squid (Pusit Bisaya), Local",
+      "price": 454.09,
+      "unit": "454.09"
+    },
+    {
+      "category": "Fish",
+      "product": "Squid, Imported",
+      "price": 219.41,
+      "unit": "219.41"
+    },
+    {
+      "category": "Fish",
+      "product": "Tambakol (Yellow-Fin Tuna), Local",
+      "price": 298.73,
+      "unit": "298.73"
+    },
+    {
+      "category": "Fish",
+      "product": "Tilapia",
+      "price": 153.2,
+      "unit": "153.20",
+      "store_name": "WalterMart",
+      "store_price": 159.0,
+      "store_product": "WalterMart Fresh Tilapia Large | kg",
+      "diff_pct": 3.8
+    },
+    {
+      "category": "Chicken",
+      "product": "Duck Meat, Local",
+      "price": 8.05,
+      "unit": "8.05"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Ampalaya",
+      "price": 132.04,
+      "unit": "132.04",
+      "store_name": "WalterMart",
+      "store_price": 245.0,
+      "store_product": "Global Fresh Ampalaya Housebrand (Bitter Gourd) | kg",
+      "diff_pct": 85.5
+    },
+    {
+      "category": "Vegetables",
+      "product": "Chilli (Green), Local",
+      "price": 122.58,
+      "unit": "122.58"
+    },
+    {
+      "category": "Eggs",
+      "product": "Native Pechay",
+      "price": 102.44,
+      "unit": "102.44"
+    },
+    {
+      "category": "Eggs",
+      "product": "Pole Sitao",
+      "price": 118.69,
+      "unit": "118.69"
+    },
+    {
+      "category": "Eggs",
+      "product": "Squash",
+      "price": 63.43,
+      "unit": "63.43"
+    },
+    {
+      "category": "Eggs",
+      "product": "Tomato",
+      "price": 67.21,
+      "unit": "67.21",
+      "store_name": "WalterMart",
+      "store_price": 130.0,
+      "store_product": "Dizon Farms Native Tomato | kg",
+      "diff_pct": 93.4
+    },
+    {
+      "category": "Vegetables",
+      "product": "Bell Pepper (Green), Local",
+      "price": 257.12,
+      "unit": "257.12"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Bell Pepper (Red), Local",
+      "price": 236.22,
+      "unit": "236.22"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Broccoli, Local",
+      "price": 182.0,
+      "unit": "182.00"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Broccoli, Imported",
+      "price": 249.24,
+      "unit": "249.24"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Cauliflower, Local",
+      "price": 130.38,
+      "unit": "130.38"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Cabbage (Rare Ball)",
+      "price": 64.19,
+      "unit": "64.19"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Cabbage (Scorpio)",
+      "price": 67.06,
+      "unit": "67.06"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Cabbage (Wonder Ball)",
+      "price": 59.11,
+      "unit": "59.11"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Carrots, Local",
+      "price": 130.95,
+      "unit": "130.95"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Carrots, Imported",
+      "price": 125.0,
+      "unit": "125.00"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Celery",
+      "price": 142.11,
+      "unit": "142.11"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Chayote",
+      "price": 88.89,
+      "unit": "88.89"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Habichuelas/Baguio Beans, Local",
+      "price": 154.38,
+      "unit": "154.38"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Pechay Baguio",
+      "price": 77.97,
+      "unit": "77.97"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Lettuce (Green Ice)",
+      "price": 200.34,
+      "unit": "200.34"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Lettuce (Iceberg)",
+      "price": 186.97,
+      "unit": "186.97"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Lettuce (Romaine)",
+      "price": 243.46,
+      "unit": "243.46"
+    },
+    {
+      "category": "Vegetables",
+      "product": "White Potato, Local",
+      "price": 103.07,
+      "unit": "103.07"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Chilli (Red), Local",
+      "price": 139.52,
+      "unit": "139.52"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Garlic, Native/Local",
+      "price": 383.33,
+      "unit": "383.33"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Garlic, Imported",
+      "price": 145.58,
+      "unit": "145.58"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Ginger, Local",
+      "price": 172.33,
+      "unit": "172.33"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Ginger, Imported",
+      "price": 133.44,
+      "unit": "133.44"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Red Onion, Local",
+      "price": 104.21,
+      "unit": "104.21"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Red Onion, Imported",
+      "price": 90.0,
+      "unit": "90.00"
+    },
+    {
+      "category": "Vegetables",
+      "product": "Red Onion, Imported",
+      "price": 85.0,
+      "unit": "85.00"
+    },
+    {
+      "category": "Vegetables",
+      "product": "White Onion, Local",
+      "price": 98.45,
+      "unit": "98.45"
+    },
+    {
+      "category": "Vegetables",
+      "product": "White Onion, Imported",
+      "price": 107.5,
+      "unit": "107.50"
+    },
+    {
+      "category": "Vegetables",
+      "product": "White Onion, Imported",
+      "price": 98.33,
+      "unit": "98.33"
+    },
+    {
+      "category": "Fruits",
+      "product": "Avocado",
+      "price": 219.0,
+      "unit": "219.00"
+    },
+    {
+      "category": "Fruits",
+      "product": "Banana (Lakatan)",
+      "price": 97.14,
+      "unit": "97.14",
+      "store_name": "WalterMart",
+      "store_price": 160.0,
+      "store_product": "Dizon Farms Banana Lacatan | kg",
+      "diff_pct": 64.7
+    },
+    {
+      "category": "Fruits",
+      "product": "Banana (Latundan)",
+      "price": 74.56,
+      "unit": "74.56"
+    },
+    {
+      "category": "Fruits",
+      "product": "Banana (Saba)",
+      "price": 57.38,
+      "unit": "57.38"
+    },
+    {
+      "category": "Fruits",
+      "product": "Calamansi",
+      "price": 122.57,
+      "unit": "122.57"
+    },
+    {
+      "category": "Fruits",
+      "product": "Mango (Carabao)",
+      "price": 141.97,
+      "unit": "141.97",
+      "store_name": "WalterMart",
+      "store_price": 200.0,
+      "store_product": "Dizon Farms Mango Sapadera | kg",
+      "diff_pct": 40.9
+    },
+    {
+      "category": "Fruits",
+      "product": "Melon",
+      "price": 101.57,
+      "unit": "101.57"
+    },
+    {
+      "category": "Fruits",
+      "product": "Papaya",
+      "price": 72.72,
+      "unit": "72.72",
+      "store_name": "WalterMart",
+      "store_price": 145.0,
+      "store_product": "Dizon Farms Papaya Green | kg",
+      "diff_pct": 99.4
+    },
+    {
+      "category": "Fruits",
+      "product": "Pomelo",
+      "price": 170.77,
+      "unit": "170.77"
+    },
+    {
+      "category": "Fruits",
+      "product": "Watermelon",
+      "price": 74.75,
+      "unit": "74.75"
+    }
   ]
 }
