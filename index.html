@@ -609,8 +609,21 @@
           tdStore.className = 'px-4 py-3 text-sm text-right tabular-nums';
 
           if (item.store_price != null) {
-            tdStore.textContent = formatPrice(item.store_price);
-            tdStore.style.color = 'var(--text-2)';
+            const priceText = formatPrice(item.store_price);
+            if (item.store_url) {
+              const a = document.createElement('a');
+              a.href = item.store_url;
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+              a.textContent = priceText;
+              a.style.cssText = 'color:var(--text-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color 0.15s,text-decoration-color 0.15s;';
+              a.addEventListener('mouseenter', () => { a.style.color = 'var(--text)'; a.style.textDecorationColor = 'var(--muted)'; });
+              a.addEventListener('mouseleave', () => { a.style.color = 'var(--text-2)'; a.style.textDecorationColor = 'var(--border)'; });
+              tdStore.appendChild(a);
+            } else {
+              tdStore.textContent = priceText;
+              tdStore.style.color = 'var(--text-2)';
+            }
             if (item.store_product) tdStore.title = item.store_product;
           } else {
             tdStore.textContent = '—';

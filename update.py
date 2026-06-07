@@ -264,14 +264,14 @@ def fetch_store_price(
     session: requests.Session,
     query: str,
     target_unit: str,
-) -> tuple[float | None, str | None]:
+) -> tuple[float | None, str | None, str | None]:
     """
     Search the WalterMart Freshop API for a product and return a normalised
-    (price_per_unit, matched_product_name) tuple.
+    (price_per_unit, matched_product_name, canonical_url) tuple.
 
     For kg items: returns price per kg (normalising 5 kg rice bags, etc.).
     For piece items: returns price per piece (normalising 12-egg cartons, etc.).
-    Returns (None, None) when no suitable match is found.
+    Returns (None, None, None) when no suitable match is found.
 
     API notes:
     - Base: https://api.freshop.ncrcloud.com/1/products
@@ -289,36 +289,37 @@ def fetch_store_price(
         products = resp.json().get("items", [])
     except Exception as exc:
         print(f"  [WalterMart] fetch error for '{query}': {exc}", file=sys.stderr)
-        return None, None
+        return None, None, None
 
     for product in products:
         if product.get("status") != "available":
             continue
 
-        name       = product.get("name", "")
-        size       = (product.get("size") or "").lower()
-        unit_price = product.get("unit_price")
+        name          = product.get("name", "")
+        size          = (product.get("size") or "").lower()
+        unit_price    = product.get("unit_price")
+        canonical_url = product.get("canonical_url")
         if not unit_price:
             continue
 
         # ── kg target ──
         if target_unit == "kg":
             if size == "kg":
-                return float(unit_price), name
+                return float(unit_price), name, canonical_url
             # Pack sold by piece but weight is in the name (e.g. "5kg bag")
             kg = _extract_kg_weight(name)
             if kg and kg > 0 and size in ("pc", "pack"):
-                return round(float(unit_price) / kg, 2), name
+                return round(float(unit_price) / kg, 2), name, canonical_url
 
         # ── piece target ──
         elif target_unit == "piece":
             if size in ("pc", "pack", "piece"):
                 count = _extract_piece_count(name)
                 if count:                              # multi-pack → normalise
-                    return round(float(unit_price) / count, 2), name
-                return float(unit_price), name         # already per-piece
+                    return round(float(unit_price) / count, 2), name, canonical_url
+                return float(unit_price), name, canonical_url  # already per-piece
 
-    return None, None
+    return None, None, None
 
 
 def add_store_prices(
@@ -337,13 +338,14 @@ def add_store_prices(
             continue
 
         query, target_unit = mapping
-        store_price, store_product = fetch_store_price(session, query, target_unit)
+        store_price, store_product, store_url = fetch_store_price(session, query, target_unit)
 
         if store_price is not None:
             diff_pct = round((store_price - item["price"]) / item["price"] * 100, 1)
             item["store_name"]    = STORE_NAME
             item["store_price"]   = store_price
             item["store_product"] = store_product   # the actual WalterMart name
+            item["store_url"]     = store_url
             item["diff_pct"]      = diff_pct
             matched += 1
             if verbose:
