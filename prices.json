@@ -1,10 +1,10 @@
 {
-  "date": "2026-06-08",
-  "source": "DA Weekly Average Prices",
+  "date": "2026-06-07",
+  "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
   "store_name": "WalterMart",
   "store_url": "https://www.waltermartdelivery.com.ph/",
-  "updated_at": "2026-06-08T05:00:00+08:00",
+  "updated_at": "2026-06-07T18:01:54+00:00",
   "items": [
     { "category": "Rice", "product": "Regular Milled Rice", "price": 45.00, "unit": "kg", "store_name": "WalterMart", "store_product": "Rej Regular Milled Rice | 5kg", "store_price": 48.00, "diff_pct": 6.7 },
     { "category": "Rice", "product": "Well-Milled Rice", "price": 49.74, "unit": "kg", "store_name": "WalterMart", "store_product": "Everyday Well Milled Rice | 5kg", "store_price": 65.45, "diff_pct": 31.6 },
