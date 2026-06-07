@@ -1,0 +1,41 @@
+name: Update Daily Prices
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 05:00 PHT (UTC+8 → UTC-8h = 21:00 UTC prev day)
+  workflow_dispatch:         # also allows manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch and parse today's prices
+        run: python update.py
+
+      - name: Commit updated prices.json (only if changed)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet prices.json; then
+            echo "prices.json unchanged — nothing to commit."
+          else
+            git add prices.json
+            git commit -m "chore: update prices $(date -u +%Y-%m-%d) (DA + WalterMart)"
+            git push
+          fi

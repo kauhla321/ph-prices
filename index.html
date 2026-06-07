@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PH Daily Commodity Prices — DA Price Index</title>
+  <meta name="description" content="Today's official Philippine commodity prices from the Department of Agriculture Daily Price Index." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Lexend', 'sans-serif'],
+            body: ['"Source Sans 3"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg:           #0a0c11;
+      --surface:      #11141c;
+      --surface-2:    #181c28;
+      --surface-hover:#1c2030;
+      --border:       #252a38;
+      --border-soft:  #1a1e2a;
+      --text:         #eef1f8;
+      --text-2:       #b5beca;
+      --muted:        #7e8799;
+      --accent:       #ff3b3b;
+      --accent-glow:  rgba(255,59,59,0.3);
+      --accent-bg:    rgba(255,59,59,0.10);
+      --accent-border:rgba(255,59,59,0.30);
+      --green:        #34d399;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse at 100% 0%, #13203a 0%, #0a0c11 60%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    h1, h2, h3, .font-heading { font-family: 'Lexend', sans-serif; }
+
+    /* ── Focus rings ── */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    input:focus-visible {
+      outline: none;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px rgba(255,59,59,0.2);
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── Chip styles ── */
+    .chip {
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-height: 36px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+    .chip-inactive {
+      background: var(--surface-2);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+    .chip-inactive:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .chip-active {
+      background: linear-gradient(135deg, #ff3b3b 0%, #ff7a3c 100%);
+      color: #fff;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 8px rgba(255,59,59,0.3);
+    }
+
+    /* ── Link hover ── */
+    .link-muted { color: var(--muted); transition: color 0.15s; }
+    .link-muted:hover { color: var(--accent); }
+    .link-accent { color: var(--accent); transition: color 0.15s; }
+    .link-accent:hover { filter: brightness(1.15); }
+
+    /* ── Search input placeholder ── */
+    #search-input::placeholder { color: var(--muted); }
+    #search-input::-webkit-search-cancel-button { opacity: 0.4; cursor: pointer; }
+
+    /* ── Mobile: table → card layout ── */
+    @media (max-width: 639px) {
+      .price-table thead { display: none; }
+
+      .price-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.625rem;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        overflow: hidden;
+      }
+      .price-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0.875rem;
+        border-bottom: 1px solid var(--border-soft);
+        font-size: 0.9375rem;
+      }
+      .price-table tbody td:last-child { border-bottom: none; }
+      .price-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--accent);
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-right: 1rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+    }
+
+    /* ── Table row dividers ── */
+    .price-table tbody tr {
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .price-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    /* ── Skeleton shimmer ── */
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #1a2436 25%, #0f121a 50%, #1a2436 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s ease-in-out infinite;
+      border-radius: 0.25rem;
+    }
+
+    /* ── Retry button ── */
+    #retry-btn {
+      background: linear-gradient(135deg, #ff3b3b, #ff7a3c);
+      color: #fff;
+      transition: box-shadow 0.15s, filter 0.15s;
+    }
+    #retry-btn:hover {
+      box-shadow: 0 4px 14px rgba(255,59,59,0.4);
+      filter: brightness(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Skip to main content -->
+  <a href="#main-content"
+     class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium focus:text-sm focus:shadow-lg"
+     style="background:var(--accent);color:#fff;">
+    Skip to main content
+  </a>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header style="background:var(--surface);border-bottom:1px solid var(--border);border-top:3px solid var(--accent);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+
+      <div class="flex items-start gap-3 min-w-0">
+        <!-- Icon -->
+        <div class="flex-shrink-0 rounded-xl p-2.5" style="background:var(--accent-bg);" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" style="color:var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight leading-tight" style="font-family:'Lexend',sans-serif;color:var(--text);">
+            PH Daily Commodity Prices
+          </h1>
+          <p class="text-sm mt-0.5 leading-snug" style="color:var(--muted);">
+            Official prices from the Department of Agriculture
+          </p>
+        </div>
+      </div>
+
+      <!-- Date badge + source link -->
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <div id="date-badge"
+             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium"
+             style="background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
+          </svg>
+          <span id="date-text">Loading…</span>
+        </div>
+
+        <a id="source-link"
+           href="https://www.da.gov.ph/price-monitoring/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="link-muted inline-flex items-center gap-1 text-sm cursor-pointer hover:underline underline-offset-2">
+          Source: DA Price Monitoring
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────────────────── -->
+  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- Controls: search + count -->
+    <div class="mb-5 space-y-3">
+      <div class="flex items-center gap-3">
+        <label for="search-input" class="sr-only">Search products or categories</label>
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" style="width:1.125rem;height:1.125rem;color:var(--muted);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </div>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search products or categories…"
+            autocomplete="off"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl text-base"
+            style="background:var(--surface-2);border:1px solid var(--border);color:var(--text);transition:border-color 0.15s;"
+          />
+        </div>
+        <span
+          id="item-count"
+          class="flex-shrink-0 text-sm whitespace-nowrap tabular-nums"
+          style="color:var(--muted);"
+          aria-live="polite"
+          aria-atomic="true"
+        ></span>
+      </div>
+
+      <!-- Category chips -->
+      <div id="category-chips" role="group" aria-label="Filter by category" class="flex flex-wrap gap-2">
+      </div>
+
+      <!-- Store comparison badge -->
+      <div id="store-badge" class="hidden items-center gap-2 flex-wrap text-sm" style="color:var(--muted);">
+        <span>Compared with</span>
+        <a id="store-badge-link" href="https://www.waltermartdelivery.com.ph/" target="_blank" rel="noopener noreferrer"
+           class="link-accent font-semibold hover:underline underline-offset-2 cursor-pointer">
+          WalterMart
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 ml-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </a>
+        <span style="color:var(--border);" aria-hidden="true">·</span>
+        <span class="inline-flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:var(--accent);" aria-hidden="true"></span>
+          <span>10%+ above official</span>
+        </span>
+        <span style="color:var(--border);" aria-hidden="true">·</span>
+        <span class="inline-flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:var(--green);" aria-hidden="true"></span>
+          <span>Store is cheaper</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Loading skeleton -->
+    <div id="loading-state" aria-busy="true" aria-label="Loading price data">
+      <div class="space-y-7">
+        <div>
+          <div class="skeleton h-5 w-24 mb-3"></div>
+          <div class="rounded-xl overflow-hidden" style="background:var(--surface);border:1px solid var(--border);">
+            <div class="divide-y" style="border-color:var(--border-soft);">
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="skeleton h-5 w-16 mb-3"></div>
+          <div class="rounded-xl overflow-hidden" style="background:var(--surface);border:1px solid var(--border);">
+            <div class="divide-y" style="border-color:var(--border-soft);">
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="skeleton h-5 w-20 mb-3"></div>
+          <div class="rounded-xl overflow-hidden" style="background:var(--surface);border:1px solid var(--border);">
+            <div class="divide-y" style="border-color:var(--border-soft);">
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+              <div class="flex gap-4 px-4 py-3.5"><div class="skeleton h-4 flex-1"></div><div class="skeleton h-4 w-16"></div><div class="skeleton h-4 w-10"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="error-state" class="hidden" role="alert">
+      <div class="rounded-xl p-8 text-center" style="background:rgba(255,59,59,0.07);border:1px solid rgba(255,59,59,0.22);">
+        <div class="flex justify-center mb-3" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" style="color:var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h2 class="text-lg font-semibold mb-1" style="font-family:'Lexend',sans-serif;color:var(--text);">
+          Could not load price data
+        </h2>
+        <p id="error-message" class="text-sm mb-5" style="color:var(--text-2);">
+          Failed to fetch prices.json.
+        </p>
+        <button
+          id="retry-btn"
+          type="button"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium cursor-pointer min-h-[44px]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+          Try again
+        </button>
+      </div>
+    </div>
+
+    <!-- Price content -->
+    <div id="content-state" class="hidden space-y-8"></div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden" role="status">
+      <div class="text-center py-14">
+        <div aria-hidden="true" class="flex justify-center mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" style="color:var(--border);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </div>
+        <p style="color:var(--muted);">
+          No products match <strong id="empty-query" style="color:var(--text);"></strong>
+        </p>
+        <button
+          id="clear-search-btn"
+          type="button"
+          class="mt-3 text-sm cursor-pointer min-h-[44px] px-2 hover:underline underline-offset-2 transition-colors duration-150"
+          style="color:var(--accent);"
+        >
+          Clear search
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer style="border-top:1px solid var(--border);" class="mt-4">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-1.5 text-sm" style="color:var(--muted);">
+      <p>
+        Data source:
+        <a href="https://www.da.gov.ph/price-monitoring/" target="_blank" rel="noopener noreferrer"
+           class="link-accent hover:underline cursor-pointer underline-offset-2">
+          Department of Agriculture — Weekly Average Prices
+        </a>
+      </p>
+      <p id="footer-updated">Updated daily by automated script.</p>
+      <p class="text-xs" style="color:var(--border-soft);filter:brightness(1.4);">
+        Prices are official DA figures. This site is not affiliated with the Department of Agriculture.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ── App state ──────────────────────────────────────────────────────────
+    let allItems       = [];
+    let activeCategory = 'All';
+    let searchQuery    = '';
+    let hasStoreData   = false;
+
+    // ── DOM refs ───────────────────────────────────────────────────────────
+    const loadingEl      = document.getElementById('loading-state');
+    const errorEl        = document.getElementById('error-state');
+    const contentEl      = document.getElementById('content-state');
+    const emptyEl        = document.getElementById('empty-state');
+    const countEl        = document.getElementById('item-count');
+    const searchInput    = document.getElementById('search-input');
+    const chipsEl        = document.getElementById('category-chips');
+    const dateText       = document.getElementById('date-text');
+    const sourceLink     = document.getElementById('source-link');
+    const footerUpdEl    = document.getElementById('footer-updated');
+    const errorMsgEl     = document.getElementById('error-message');
+    const emptyQueryEl   = document.getElementById('empty-query');
+    const storeBadge     = document.getElementById('store-badge');
+    const storeBadgeLink = document.getElementById('store-badge-link');
+
+    // ── Helpers ────────────────────────────────────────────────────────────
+    function formatDate(str) {
+      const [y, m, d] = str.split('-').map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString('en-PH', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+
+    function formatUpdatedAt(iso) {
+      try {
+        return new Date(iso).toLocaleString('en-PH', {
+          year: 'numeric', month: 'long', day: 'numeric',
+          hour: '2-digit', minute: '2-digit',
+          timeZone: 'Asia/Manila'
+        });
+      } catch { return iso; }
+    }
+
+    function formatPrice(p) { return '₱' + Number(p).toFixed(2); }
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function slugify(s) {
+      return s.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    }
+
+    function groupByCategory(items) {
+      const map = new Map();
+      for (const item of items) {
+        if (!map.has(item.category)) map.set(item.category, []);
+        map.get(item.category).push(item);
+      }
+      return map;
+    }
+
+    function getFiltered() {
+      const q = searchQuery.trim().toLowerCase();
+      return allItems.filter(item => {
+        const matchSearch   = !q ||
+          item.product.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q);
+        const matchCategory = activeCategory === 'All' || item.category === activeCategory;
+        return matchSearch && matchCategory;
+      });
+    }
+
+    // ── State switching ────────────────────────────────────────────────────
+    function showState(state) {
+      loadingEl.classList.toggle('hidden', state !== 'loading');
+      errorEl  .classList.toggle('hidden', state !== 'error');
+      emptyEl  .classList.toggle('hidden', state !== 'empty');
+      contentEl.classList.toggle('hidden', state === 'loading' || state === 'error');
+    }
+
+    // ── Chips ──────────────────────────────────────────────────────────────
+    function buildChips(categories) {
+      chipsEl.innerHTML = '';
+      for (const cat of ['All', ...categories]) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = cat;
+        btn.dataset.cat = cat;
+        const active = cat === activeCategory;
+        btn.className = 'chip ' + (active ? 'chip-active' : 'chip-inactive');
+        btn.setAttribute('aria-pressed', String(active));
+        btn.addEventListener('click', () => { activeCategory = cat; renderAll(); });
+        chipsEl.appendChild(btn);
+      }
+    }
+
+    function refreshChips() {
+      chipsEl.querySelectorAll('button').forEach(btn => {
+        const active = btn.dataset.cat === activeCategory;
+        btn.className = 'chip ' + (active ? 'chip-active' : 'chip-inactive');
+        btn.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    // ── Diff styling ──────────────────────────────────────────────────────
+    function diffStyle(diff) {
+      const base = 'px-4 py-3 text-sm text-right tabular-nums';
+      if (diff == null) return { cls: base,                   color: 'var(--muted)'  };
+      if (diff > 10)    return { cls: base + ' font-semibold', color: 'var(--accent)' };
+      if (diff < 0)     return { cls: base + ' font-semibold', color: 'var(--green)'  };
+      return                   { cls: base,                   color: 'var(--muted)'  };
+    }
+
+    function formatDiff(diff) {
+      if (diff == null) return '—';
+      return (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
+    }
+
+    // ── Build one category section ─────────────────────────────────────────
+    function buildSection(category, items) {
+      const slug    = slugify(category);
+      const section = document.createElement('section');
+      section.id    = 'cat-' + slug;
+      section.setAttribute('aria-labelledby', 'h-' + slug);
+
+      // Heading
+      const h2  = document.createElement('h2');
+      h2.id     = 'h-' + slug;
+      h2.style.cssText = "font-family:'Lexend',sans-serif;color:var(--accent);font-size:0.9375rem;font-weight:600;margin-bottom:0.625rem;display:flex;align-items:center;gap:0.5rem;";
+      h2.innerHTML =
+        escHtml(category) +
+        `<span style="font-size:0.8125rem;font-weight:400;color:var(--muted);">${items.length} item${items.length !== 1 ? 's' : ''}</span>`;
+
+      // Card wrapper
+      const wrap       = document.createElement('div');
+      wrap.className   = 'rounded-xl overflow-hidden';
+      wrap.style.cssText = 'background:var(--surface);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.4);';
+
+      const scrollWrap = document.createElement('div');
+      scrollWrap.className = 'overflow-x-auto';
+
+      const table       = document.createElement('table');
+      table.className   = 'price-table w-full text-left';
+
+      const caption     = document.createElement('caption');
+      caption.className = 'sr-only';
+      caption.textContent = category + ' prices';
+
+      // Table head
+      const thead = document.createElement('thead');
+      thead.style.cssText = 'background:var(--surface-2);border-bottom:1px solid var(--border);';
+      const TH  = 'px-4 py-3 text-xs font-semibold uppercase tracking-wide';
+      const thS = 'color:var(--muted);';
+      if (hasStoreData) {
+        thead.innerHTML = `<tr>
+          <th scope="col" class="${TH}" style="${thS}">Product</th>
+          <th scope="col" class="${TH} text-right" style="${thS}">DA Price</th>
+          <th scope="col" class="${TH} text-right" style="${thS}">Unit</th>
+          <th scope="col" class="${TH} text-right whitespace-nowrap" style="${thS}">WalterMart</th>
+          <th scope="col" class="${TH} text-right whitespace-nowrap" style="${thS}">vs DA</th>
+        </tr>`;
+      } else {
+        thead.innerHTML = `<tr>
+          <th scope="col" class="${TH}" style="${thS}">Product</th>
+          <th scope="col" class="${TH} text-right" style="${thS}">Price</th>
+          <th scope="col" class="${TH} text-right" style="${thS}">Unit</th>
+        </tr>`;
+      }
+
+      // Table body
+      const tbody = document.createElement('tbody');
+
+      for (const item of items) {
+        const tr = document.createElement('tr');
+        tr.style.transition = 'background 0.1s';
+        tr.addEventListener('mouseenter', () => tr.style.background = 'var(--surface-hover)');
+        tr.addEventListener('mouseleave', () => tr.style.background = '');
+
+        const tdProd = document.createElement('td');
+        tdProd.setAttribute('data-label', 'Product');
+        tdProd.className = 'px-4 py-3 font-medium text-sm sm:text-base';
+        tdProd.style.color = 'var(--text)';
+        tdProd.textContent = item.product;
+
+        const tdPrice = document.createElement('td');
+        tdPrice.setAttribute('data-label', hasStoreData ? 'DA Price' : 'Price');
+        tdPrice.className = 'px-4 py-3 font-semibold text-sm sm:text-base text-right tabular-nums';
+        tdPrice.style.color = 'var(--text)';
+        tdPrice.textContent = formatPrice(item.price);
+
+        const tdUnit = document.createElement('td');
+        tdUnit.setAttribute('data-label', 'Unit');
+        tdUnit.className = 'px-4 py-3 text-sm text-right';
+        tdUnit.style.color = 'var(--muted)';
+        tdUnit.textContent = item.unit;
+
+        tr.append(tdProd, tdPrice, tdUnit);
+
+        if (hasStoreData) {
+          const tdStore = document.createElement('td');
+          tdStore.setAttribute('data-label', 'WalterMart');
+          tdStore.className = 'px-4 py-3 text-sm text-right tabular-nums';
+
+          if (item.store_price != null) {
+            tdStore.textContent = formatPrice(item.store_price);
+            tdStore.style.color = 'var(--text-2)';
+            if (item.store_product) tdStore.title = item.store_product;
+          } else {
+            tdStore.textContent = '—';
+            tdStore.style.color = 'var(--muted)';
+          }
+
+          const tdDiff  = document.createElement('td');
+          tdDiff.setAttribute('data-label', 'vs DA');
+          const diff    = item.diff_pct ?? null;
+          const ds      = diffStyle(diff);
+          tdDiff.className    = ds.cls;
+          tdDiff.style.color  = ds.color;
+          tdDiff.textContent  = formatDiff(diff);
+
+          tr.append(tdStore, tdDiff);
+        }
+
+        tbody.appendChild(tr);
+      }
+
+      table.append(caption, thead, tbody);
+      scrollWrap.appendChild(table);
+      wrap.appendChild(scrollWrap);
+      section.append(h2, wrap);
+      return section;
+    }
+
+    // ── Main render ────────────────────────────────────────────────────────
+    function renderAll() {
+      const filtered = getFiltered();
+      refreshChips();
+
+      storeBadge.classList.toggle('hidden', !hasStoreData);
+      storeBadge.classList.toggle('flex',    hasStoreData);
+
+      if (allItems.length === 0) {
+        countEl.textContent = '';
+      } else if (filtered.length === allItems.length) {
+        countEl.textContent = allItems.length + ' items';
+      } else {
+        countEl.textContent = 'Showing ' + filtered.length + ' of ' + allItems.length;
+      }
+
+      if (filtered.length === 0) {
+        emptyQueryEl.textContent = searchQuery ? '"' + searchQuery + '"' : 'that filter';
+        contentEl.innerHTML = '';
+        showState('empty');
+        return;
+      }
+
+      contentEl.innerHTML = '';
+      const groups = groupByCategory(filtered);
+      for (const [cat, items] of groups) {
+        contentEl.appendChild(buildSection(cat, items));
+      }
+      showState('content');
+    }
+
+    // ── Data fetch ─────────────────────────────────────────────────────────
+    async function loadPrices() {
+      showState('loading');
+      try {
+        const res = await fetch('prices.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + res.statusText);
+        const data = await res.json();
+
+        allItems     = Array.isArray(data.items) ? data.items : [];
+        hasStoreData = allItems.some(i => i.store_price != null);
+
+        if (data.date)       dateText.textContent = 'Prices as of ' + formatDate(data.date);
+        if (data.source_url) sourceLink.href = data.source_url;
+        if (data.store_url)  storeBadgeLink.href = data.store_url;
+        if (data.store_name) storeBadgeLink.childNodes[0].textContent = data.store_name;
+        if (data.updated_at) footerUpdEl.textContent = 'Last updated: ' + formatUpdatedAt(data.updated_at);
+
+        const categories = [...new Set(allItems.map(i => i.category))];
+        buildChips(categories);
+        renderAll();
+      } catch (err) {
+        errorMsgEl.textContent = err.message || 'Failed to load prices.json.';
+        showState('error');
+      }
+    }
+
+    // ── Events ────────────────────────────────────────────────────────────
+    searchInput.addEventListener('input', () => { searchQuery = searchInput.value; renderAll(); });
+    document.getElementById('retry-btn').addEventListener('click', loadPrices);
+    document.getElementById('clear-search-btn').addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      renderAll();
+    });
+
+    // ── Boot ──────────────────────────────────────────────────────────────
+    loadPrices();
+  </script>
+
+</body>
+</html>
