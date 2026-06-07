@@ -102,7 +102,11 @@ def find_today_pdf(session: requests.Session) -> str | None:
     resp = session.get(DA_LISTING_URL, timeout=30)
     resp.raise_for_status()
     html = resp.text
+    # Weekly Average Prices preferred — consistent curated commodity list.
+    # Falls back to Daily Price Index if weekly is not yet published.
     patterns = [
+        r'href=["\']([^"\']*[Ww]eekly[_\-\s]?[Aa]verage[^"\']*\.pdf)["\']',
+        r'href=["\']([^"\']*[Ww]eekly[^"\']*[Pp]rice[^"\']*\.pdf)["\']',
         r'href=["\']([^"\']*daily[_\-]?price[_\-]?index[^"\']*\.pdf)["\']',
         r'href=["\']([^"\']*dpi[^"\']*\.pdf)["\']',
         r'href=["\']([^"\']*price[_\-]?index[^"\']*\.pdf)["\']',
@@ -148,7 +152,7 @@ def normalize_unit(text: str) -> str:
     for v in ("liter", "litre", "l", "per liter"):
         if v in t:
             return "liter"
-    return t or "kg"
+    return "kg"
 
 
 def clean_product_name(text: str) -> str:
@@ -208,7 +212,9 @@ def parse_pdf(pdf_path: str) -> list[dict]:
                         if cat:
                             current_category = cat
                         continue
-                    product = cells[0]
+                    # Weekly bulletin has a blank col 0; commodity is at col 1.
+                    # Daily DPI has the commodity at col 0. Try both.
+                    product = cells[0] or (cells[1] if len(cells) > 1 else "")
                     if not product or not current_category:
                         continue
                     if classify_category(product):
