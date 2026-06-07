@@ -8,22 +8,22 @@
   "items": [
     { "category": "Rice", "product": "Regular Milled Rice", "price": 45.00, "unit": "kg", "store_name": "WalterMart", "store_product": "Rej Regular Milled Rice | 5kg", "store_price": 48.00, "diff_pct": 6.7 },
     { "category": "Rice", "product": "Well-Milled Rice", "price": 49.74, "unit": "kg", "store_name": "WalterMart", "store_product": "Everyday Well Milled Rice | 5kg", "store_price": 65.45, "diff_pct": 31.6 },
-    { "category": "Rice", "product": "Special Rice", "price": 60.30, "unit": "kg" },
+    { "category": "Rice", "product": "Special Rice", "price": 60.30, "unit": "kg", "store_name": "WalterMart", "store_product": "Amparos Special Local White Sinandomeng | kg", "store_price": 67.75, "diff_pct": 12.4 },
     { "category": "Pork", "product": "Kasim", "price": 345.55, "unit": "kg", "store_name": "WalterMart", "store_product": "Cabanatuan Meat Products Pork Kasim | kg", "store_price": 345.00, "diff_pct": -0.2 },
-    { "category": "Pork", "product": "Liempo", "price": 399.87, "unit": "kg", "store_name": "WalterMart", "store_product": "W Prime Meats Pork Sliced Belly | kg", "store_price": 365.00, "diff_pct": -8.7 },
+    { "category": "Pork", "product": "Liempo", "price": 399.87, "unit": "kg", "store_name": "WalterMart", "store_product": "Fresh Options Pork Sliced Belly | kg", "store_price": 514.75, "diff_pct": 28.7 },
     { "category": "Beef", "product": "Beef Brisket", "price": 444.53, "unit": "kg", "store_name": "WalterMart", "store_product": "W Prime Meats Beef Brisket | kg", "store_price": 470.00, "diff_pct": 5.7 },
     { "category": "Beef", "product": "Beef Rump (Camto)", "price": 495.13, "unit": "kg", "store_name": "WalterMart", "store_product": "Mrs. Garcia's Beef Camto | kg", "store_price": 609.00, "diff_pct": 23.0 },
-    { "category": "Chicken", "product": "Whole Chicken", "price": 199.16, "unit": "kg", "store_name": "WalterMart", "store_product": "Whole Chicken | kg", "store_price": 195.00, "diff_pct": -2.1 },
+    { "category": "Chicken", "product": "Whole Chicken", "price": 199.16, "unit": "kg", "store_name": "WalterMart", "store_product": "Waltermart Chicken Whole | kg", "store_price": 180.00, "diff_pct": -9.6 },
     { "category": "Fish", "product": "Bangus", "price": 249.88, "unit": "kg", "store_name": "WalterMart", "store_product": "Fishta Marinated Boneless Bangus Vacuum Pack | kg", "store_price": 410.00, "diff_pct": 64.1 },
     { "category": "Fish", "product": "Tilapia", "price": 154.24, "unit": "kg", "store_name": "WalterMart", "store_product": "WalterMart Fresh Tilapia Large | kg", "store_price": 159.00, "diff_pct": 3.1 },
     { "category": "Fish", "product": "Galunggong", "price": 232.30, "unit": "kg", "store_name": "WalterMart", "store_product": "Fishta Galunggong Big | kg", "store_price": 425.00, "diff_pct": 83.0 },
-    { "category": "Vegetables", "product": "Ampalaya", "price": 126.60, "unit": "kg", "store_name": "WalterMart", "store_product": "WalterMart Ampalaya (Bitter Gourd) | kg", "store_price": 135.00, "diff_pct": 6.6 },
+    { "category": "Vegetables", "product": "Ampalaya", "price": 126.60, "unit": "kg", "store_name": "WalterMart", "store_product": "Global Fresh Ampalaya Housebrand (Bitter Gourd) | kg", "store_price": 245.00, "diff_pct": 93.5 },
     { "category": "Vegetables", "product": "Tomato", "price": 67.38, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Native Tomato | kg", "store_price": 130.00, "diff_pct": 92.9 },
     { "category": "Vegetables", "product": "Sitaw", "price": 117.26, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Sitaw | kg", "store_price": 250.00, "diff_pct": 113.2 },
     { "category": "Fruits", "product": "Banana (Lakatan)", "price": 98.49, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Banana Lacatan | kg", "store_price": 160.00, "diff_pct": 62.5 },
-    { "category": "Fruits", "product": "Papaya", "price": 73.40, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Red Lady Papaya | kg", "store_price": 100.00, "diff_pct": 36.2 },
+    { "category": "Fruits", "product": "Papaya", "price": 73.40, "unit": "kg", "store_name": "WalterMart", "store_product": "Palengke Fresh Red Lady Papaya | kg", "store_price": 65.00, "diff_pct": -11.4 },
     { "category": "Fruits", "product": "Mango (Carabao)", "price": 148.96, "unit": "kg", "store_name": "WalterMart", "store_product": "Dizon Farms Mango Sapadera | kg", "store_price": 200.00, "diff_pct": 34.3 },
-    { "category": "Eggs", "product": "Chicken Eggs (Medium)", "price": 7.98, "unit": "piece", "store_name": "WalterMart", "store_product": "EggSakto Medium Eggs | 12s", "store_price": 9.83, "diff_pct": 23.2 },
-    { "category": "Eggs", "product": "Chicken Eggs (Large)", "price": 8.59, "unit": "piece", "store_name": "WalterMart", "store_product": "Bounty Fresh Medium Premium Eggs | 12s", "store_price": 10.67, "diff_pct": 24.2 }
+    { "category": "Eggs", "product": "Chicken Eggs (Medium)", "price": 7.98, "unit": "piece", "store_name": "WalterMart", "store_product": "Bounty Fresh Medium Premium Eggs | 12s", "store_price": 10.67, "diff_pct": 33.7 },
+    { "category": "Eggs", "product": "Chicken Eggs (Large)", "price": 8.59, "unit": "piece", "store_name": "WalterMart", "store_product": "Addy's Farm Fresh Eggs Large | 12s", "store_price": 8.75, "diff_pct": 1.9 }
   ]
 }

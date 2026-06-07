@@ -70,7 +70,7 @@ PRODUCT_MAPPING: dict[str, tuple[str, str]] = {
     "Special Rice":           ("special rice",         "kg"),
     # ── Pork ──
     "Kasim":                  ("pork kasim",           "kg"),
-    "Liempo":                 ("pork belly",           "kg"),
+    "Liempo":                 ("pork sliced belly",    "kg"),
     # ── Beef (DA tracks exactly two cuts) ──
     "Beef Brisket":           ("beef brisket",         "kg"),
     "Beef Rump (Camto)":      ("beef camto",           "kg"),
