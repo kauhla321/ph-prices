@@ -243,6 +243,38 @@ def _unit_col(header_row: list) -> int | None:
     return None
 
 
+_MEAT_HINTS = ("pork", "beef", "chicken", "kasim", "liempo", "brisket",
+               "rump", "camto", "manok", "baboy", "baka", "egg", "itlog",
+               "livestock", "poultry", "carcass", "ham")
+
+
+def debug_dump_pdf(pdf_path: str) -> None:
+    """Read-only diagnostic: dump how pdfplumber sees the PDF so we can find out
+    why a commodity section (e.g. livestock/poultry/eggs) is being dropped.
+    Prints table structure plus any text lines that mention meat/egg keywords."""
+    with pdfplumber.open(pdf_path) as pdf:
+        print(f"\n===== PDF DEBUG: {len(pdf.pages)} page(s) =====")
+        for pno, page in enumerate(pdf.pages, 1):
+            tables = page.extract_tables()
+            print(f"\n----- page {pno}: {len(tables)} table(s) -----")
+            for tno, table in enumerate(tables):
+                rows = table or []
+                print(f"  table {tno}: {len(rows)} row(s); first cell of each row:")
+                for r in rows:
+                    first = next((str(c).strip() for c in r if c and str(c).strip()), "")
+                    print(f"      | {first[:60]}")
+            # Text fallback: surface any line that looks like a meat/egg entry,
+            # which tells us if the section exists in text but not in a table.
+            text = page.extract_text() or ""
+            hits = [ln.strip() for ln in text.splitlines()
+                    if any(h in ln.lower() for h in _MEAT_HINTS)]
+            if hits:
+                print(f"  text lines mentioning meat/egg ({len(hits)}):")
+                for ln in hits:
+                    print(f"      » {ln[:90]}")
+    print("\n===== END PDF DEBUG =====\n")
+
+
 def parse_pdf(pdf_path: str) -> list[dict]:
     """
     Parse prices from a DA Daily Price Index PDF.
@@ -488,6 +520,8 @@ def main() -> None:
                         help="Print result without writing prices.json.")
     parser.add_argument("--skip-store", action="store_true",
                         help="Skip WalterMart fetch (DA prices only).")
+    parser.add_argument("--debug", action="store_true",
+                        help="Dump raw PDF table/text structure and exit (read-only).")
     args = parser.parse_args()
 
     session = requests.Session()
@@ -516,6 +550,10 @@ def main() -> None:
         tmp_path = tmp.name
 
     try:
+        if args.debug:
+            debug_dump_pdf(tmp_path)
+            return
+
         # ── Step 3: parse DA prices ──
         print("Parsing DA PDF tables…")
         items = parse_pdf(tmp_path)
