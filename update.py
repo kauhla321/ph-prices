@@ -87,7 +87,8 @@ PRODUCT_CATEGORY_RULES: list[tuple[str, tuple[str, ...]]] = [
                     "onion", "okra", "kangkong", "upo", "patola", "gabi",
                     "camote", "mungbean", "monggo", "mongo", "munggo")),
     ("Sugar",      ("sugar", "asukal")),
-    ("Cooking Oil", ("cooking oil", "mantika", "palm oil")),
+    ("Cooking Oil", ("cooking oil", "mantika", "palm oil", "coconut oil")),
+    ("Salt",       ("salt", "asin")),
 ]
 
 # ── WalterMart store matchers ─────────────────────────────────────────────────
@@ -318,9 +319,13 @@ def parse_pdf(pdf_path: str) -> list[dict]:
                     product = cells[0] or (cells[1] if len(cells) > 1 else "")
                     if not product or not current_category:
                         continue
-                    if classify_category(product):
-                        current_category = classify_category(product)
-                        continue
+                    # NOTE: a multi-column row with a price is always a product,
+                    # never a section header. We must NOT reclassify it here — doing
+                    # so dropped every commodity whose name contains its own category
+                    # keyword (Beef Brisket, Pork Belly, Whole Chicken, Chicken Egg,
+                    # Corn, Sugar, Salt, Cooking Oil, Eggplant). Section headers are
+                    # handled above via the single-cell-row branch. The correct
+                    # category is assigned per-item by classify_product_category().
                     price: float | None = None
                     if price_col is not None and price_col < len(cells):
                         price = parse_price(cells[price_col])
@@ -401,16 +406,26 @@ def fetch_store_price(
     - Crawl-delay in robots.txt applies to their WP site, not this API domain
     - We fetch only ~25 items, once a day → negligible traffic
     """
-    try:
-        resp = session.get(
-            WALTER_MART_API,
-            params={"app_key": WALTER_MART_APP_KEY, "limit": 10, "q": query},
-            timeout=15,
-        )
-        resp.raise_for_status()
-        products = resp.json().get("items", [])
-    except Exception as exc:
-        print(f"  [WalterMart] fetch error for '{query}': {exc}", file=sys.stderr)
+    # The Freshop API intermittently returns 4xx/5xx under bursty traffic, so
+    # retry a couple of times with a short backoff before giving up.
+    products = None
+    last_exc: Exception | None = None
+    for attempt in range(3):
+        try:
+            resp = session.get(
+                WALTER_MART_API,
+                params={"app_key": WALTER_MART_APP_KEY, "limit": 10, "q": query},
+                timeout=15,
+            )
+            resp.raise_for_status()
+            products = resp.json().get("items", [])
+            break
+        except Exception as exc:           # noqa: BLE001 — network/HTTP/JSON
+            last_exc = exc
+            if attempt < 2:
+                time.sleep(1.5 * (attempt + 1))
+    if products is None:
+        print(f"  [WalterMart] fetch error for '{query}': {last_exc}", file=sys.stderr)
         return None, None, None
 
     for product in products:
