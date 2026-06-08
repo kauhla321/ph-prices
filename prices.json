@@ -4,7 +4,7 @@
   "source_url": "https://www.da.gov.ph/price-monitoring/",
   "store_name": "WalterMart",
   "store_url": "https://www.waltermartdelivery.com.ph/",
-  "updated_at": "2026-06-08T02:48:16+00:00",
+  "updated_at": "2026-06-08T02:51:10+00:00",
   "items": [
     {
       "category": "Rice",
@@ -481,7 +481,12 @@
       "category": "Vegetables",
       "product": "Tomato",
       "price": 67.67,
-      "unit": "kg"
+      "unit": "kg",
+      "store_name": "WalterMart",
+      "store_price": 130.0,
+      "store_product": "Dizon Farms Native Tomato | kg",
+      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_native_tomato_kg/p/1564405684710183781",
+      "diff_pct": 92.1
     },
     {
       "category": "Vegetables",
