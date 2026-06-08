@@ -274,28 +274,6 @@
       <!-- Category chips -->
       <div id="category-chips" role="group" aria-label="Filter by category" class="flex flex-wrap gap-2">
       </div>
-
-      <!-- Store comparison badge -->
-      <div id="store-badge" class="hidden items-center gap-2 flex-wrap text-sm" style="color:var(--muted);">
-        <span>Compared with</span>
-        <a id="store-badge-link" href="https://www.waltermartdelivery.com.ph/" target="_blank" rel="noopener noreferrer"
-           class="link-accent font-semibold hover:underline underline-offset-2 cursor-pointer">
-          WalterMart
-          <svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 ml-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-          </svg>
-        </a>
-        <span style="color:var(--border);" aria-hidden="true">·</span>
-        <span class="inline-flex items-center gap-1.5">
-          <span class="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:var(--accent);" aria-hidden="true"></span>
-          <span>10%+ above official</span>
-        </span>
-        <span style="color:var(--border);" aria-hidden="true">·</span>
-        <span class="inline-flex items-center gap-1.5">
-          <span class="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:var(--green);" aria-hidden="true"></span>
-          <span>Store is cheaper</span>
-        </span>
-      </div>
     </div>
 
     <!-- Loading skeleton -->
@@ -409,7 +387,6 @@
     let allItems       = [];
     let activeCategory = 'All';
     let searchQuery    = '';
-    let hasStoreData   = false;
 
     // ── DOM refs ───────────────────────────────────────────────────────────
     const loadingEl      = document.getElementById('loading-state');
@@ -424,8 +401,6 @@
     const footerUpdEl    = document.getElementById('footer-updated');
     const errorMsgEl     = document.getElementById('error-message');
     const emptyQueryEl   = document.getElementById('empty-query');
-    const storeBadge     = document.getElementById('store-badge');
-    const storeBadgeLink = document.getElementById('store-badge-link');
 
     // ── Helpers ────────────────────────────────────────────────────────────
     function formatDate(str) {
@@ -509,20 +484,6 @@
       });
     }
 
-    // ── Diff styling ──────────────────────────────────────────────────────
-    function diffStyle(diff) {
-      const base = 'px-4 py-3 text-sm text-right tabular-nums';
-      if (diff == null) return { cls: base,                   color: 'var(--muted)'  };
-      if (diff > 10)    return { cls: base + ' font-semibold', color: 'var(--accent)' };
-      if (diff < 0)     return { cls: base + ' font-semibold', color: 'var(--green)'  };
-      return                   { cls: base,                   color: 'var(--muted)'  };
-    }
-
-    function formatDiff(diff) {
-      if (diff == null) return '—';
-      return (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
-    }
-
     // ── Build one category section ─────────────────────────────────────────
     function buildSection(category, items) {
       const slug    = slugify(category);
@@ -558,21 +519,11 @@
       thead.style.cssText = 'background:var(--surface-2);border-bottom:1px solid var(--border);';
       const TH  = 'px-4 py-3 text-xs font-semibold uppercase tracking-wide';
       const thS = 'color:var(--muted);';
-      if (hasStoreData) {
-        thead.innerHTML = `<tr>
-          <th scope="col" class="${TH}" style="${thS}">Product</th>
-          <th scope="col" class="${TH} text-right" style="${thS}">DA Price</th>
-          <th scope="col" class="${TH} text-right" style="${thS}">Unit</th>
-          <th scope="col" class="${TH} text-right whitespace-nowrap" style="${thS}">WalterMart</th>
-          <th scope="col" class="${TH} text-right whitespace-nowrap" style="${thS}">vs DA</th>
-        </tr>`;
-      } else {
-        thead.innerHTML = `<tr>
-          <th scope="col" class="${TH}" style="${thS}">Product</th>
-          <th scope="col" class="${TH} text-right" style="${thS}">Price</th>
-          <th scope="col" class="${TH} text-right" style="${thS}">Unit</th>
-        </tr>`;
-      }
+      thead.innerHTML = `<tr>
+        <th scope="col" class="${TH}" style="${thS}">Product</th>
+        <th scope="col" class="${TH} text-right" style="${thS}">Price</th>
+        <th scope="col" class="${TH} text-right" style="${thS}">Unit</th>
+      </tr>`;
 
       // Table body
       const tbody = document.createElement('tbody');
@@ -590,7 +541,7 @@
         tdProd.textContent = item.product;
 
         const tdPrice = document.createElement('td');
-        tdPrice.setAttribute('data-label', hasStoreData ? 'DA Price' : 'Price');
+        tdPrice.setAttribute('data-label', 'Price');
         tdPrice.className = 'px-4 py-3 font-semibold text-sm sm:text-base text-right tabular-nums';
         tdPrice.style.color = 'var(--text)';
         tdPrice.textContent = formatPrice(item.price);
@@ -602,77 +553,6 @@
         tdUnit.textContent = item.unit;
 
         tr.append(tdProd, tdPrice, tdUnit);
-
-        if (hasStoreData) {
-          const tdStore = document.createElement('td');
-          tdStore.setAttribute('data-label', 'WalterMart');
-          tdStore.className = 'px-4 py-3 text-sm text-right tabular-nums';
-
-          if (item.store_price != null) {
-            const priceText = formatPrice(item.store_price);
-            // Trim the trailing " | kg" / " | pc" unit suffix Freshop appends.
-            const cleanName = item.store_product
-              ? item.store_product.replace(/\s*\|\s*\S+\s*$/, '').trim()
-              : '';
-
-            if (item.store_url) {
-              // Link straight to the actual product page on WalterMart, with the
-              // matched product name shown beneath the price.
-              const a = document.createElement('a');
-              a.href   = item.store_url;
-              a.target = '_blank';
-              a.rel    = 'noopener noreferrer';
-              a.style.cssText = 'display:inline-flex;flex-direction:column;align-items:flex-end;gap:1px;text-decoration:none;';
-              if (item.store_product) a.title = 'View on WalterMart: ' + item.store_product;
-
-              const priceSpan = document.createElement('span');
-              priceSpan.textContent = priceText;
-              priceSpan.style.cssText = 'color:var(--text-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color 0.15s,text-decoration-color 0.15s;';
-
-              a.appendChild(priceSpan);
-
-              if (cleanName) {
-                const nameSpan = document.createElement('span');
-                nameSpan.textContent = cleanName;
-                nameSpan.className = 'store-product-name';
-                nameSpan.style.cssText = 'font-size:0.6875rem;line-height:1.15;color:var(--muted);max-width:11rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color 0.15s;';
-                a.appendChild(nameSpan);
-              }
-
-              a.addEventListener('mouseenter', () => {
-                priceSpan.style.color = 'var(--text)';
-                priceSpan.style.textDecorationColor = 'var(--muted)';
-                const n = a.querySelector('.store-product-name');
-                if (n) n.style.color = 'var(--text-2)';
-              });
-              a.addEventListener('mouseleave', () => {
-                priceSpan.style.color = 'var(--text-2)';
-                priceSpan.style.textDecorationColor = 'var(--border)';
-                const n = a.querySelector('.store-product-name');
-                if (n) n.style.color = 'var(--muted)';
-              });
-              tdStore.appendChild(a);
-            } else {
-              tdStore.textContent = priceText;
-              tdStore.style.color = 'var(--text-2)';
-              if (item.store_product) tdStore.title = item.store_product;
-            }
-          } else {
-            tdStore.textContent = '—';
-            tdStore.style.color = 'var(--muted)';
-          }
-
-          const tdDiff  = document.createElement('td');
-          tdDiff.setAttribute('data-label', 'vs DA');
-          const diff    = item.diff_pct ?? null;
-          const ds      = diffStyle(diff);
-          tdDiff.className    = ds.cls;
-          tdDiff.style.color  = ds.color;
-          tdDiff.textContent  = formatDiff(diff);
-
-          tr.append(tdStore, tdDiff);
-        }
-
         tbody.appendChild(tr);
       }
 
@@ -687,9 +567,6 @@
     function renderAll() {
       const filtered = getFiltered();
       refreshChips();
-
-      storeBadge.classList.toggle('hidden', !hasStoreData);
-      storeBadge.classList.toggle('flex',    hasStoreData);
 
       if (allItems.length === 0) {
         countEl.textContent = '';
@@ -722,13 +599,10 @@
         if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + res.statusText);
         const data = await res.json();
 
-        allItems     = Array.isArray(data.items) ? data.items : [];
-        hasStoreData = allItems.some(i => i.store_price != null);
+        allItems = Array.isArray(data.items) ? data.items : [];
 
         if (data.date)       dateText.textContent = 'Prices as of ' + formatDate(data.date);
         if (data.source_url) sourceLink.href = data.source_url;
-        if (data.store_url)  storeBadgeLink.href = data.store_url;
-        if (data.store_name) storeBadgeLink.childNodes[0].textContent = data.store_name;
         if (data.updated_at) footerUpdEl.textContent = 'Last updated: ' + formatUpdatedAt(data.updated_at);
 
         const categories = [...new Set(allItems.map(i => i.category))];

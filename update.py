@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 """
-update.py — Fetch today's DA Daily Price Index + WalterMart store prices.
-
-Writes prices.json with:
-  • DA official prices (always present)
-  • WalterMart supermarket prices for matched items (added when found)
+update.py — Fetch today's DA (Department of Agriculture) price bulletin and
+write prices.json with the official commodity prices.
 
 Usage:
-    python update.py              # fetch both sources, write prices.json
+    python update.py              # fetch and write prices.json
     python update.py --dry-run    # print result without writing
-    python update.py --skip-store # skip WalterMart (DA prices only)
+    python update.py --debug      # dump raw PDF structure and exit (read-only)
 """
 
 import argparse
@@ -17,7 +14,6 @@ import json
 import os
 import re
 import sys
-import time
 import tempfile
 from datetime import datetime
 from pathlib import Path
@@ -27,19 +23,14 @@ import pdfplumber
 import requests
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-DA_LISTING_URL      = "https://www.da.gov.ph/price-monitoring/"
-WALTER_MART_API     = "https://api.freshop.ncrcloud.com/1/products"
-WALTER_MART_APP_KEY = "walter_mart"     # public key in their page source
-STORE_NAME          = "WalterMart"
-STORE_URL           = "https://www.waltermartdelivery.com.ph/"
-OUTPUT_FILE         = Path(__file__).parent / "prices.json"
-HEADERS             = {
+DA_LISTING_URL = "https://www.da.gov.ph/price-monitoring/"
+OUTPUT_FILE    = Path(__file__).parent / "prices.json"
+HEADERS        = {
     "User-Agent": (
         "Mozilla/5.0 (compatible; PH-Price-Checker/1.0; "
         "+https://github.com/cjalcazar123/ph-price-site)"
     )
 }
-STORE_REQUEST_DELAY = 0.5   # seconds between Freshop API calls (be polite)
 
 # ── DA category map ───────────────────────────────────────────────────────────
 CATEGORY_MAP = {
@@ -90,63 +81,6 @@ PRODUCT_CATEGORY_RULES: list[tuple[str, tuple[str, ...]]] = [
     ("Cooking Oil", ("cooking oil", "mantika", "palm oil", "coconut oil")),
     ("Salt",       ("salt", "asin")),
 ]
-
-# ── WalterMart store matchers ─────────────────────────────────────────────────
-# (category, keyword in DA product name, Freshop query, expected unit)
-# Matched by substring against the DA product name (scoped to a category so a
-# generic keyword like "premium" can't leak across sections), so DA names like
-# "Bangus, Large" or "Galunggong, Local" map correctly. Checked in order.
-# Rice bags (sold as 5 kg packs) and egg trays (sold as 12s) are normalised to
-# per-kg / per-piece automatically by fetch_store_price().
-STORE_MATCHERS: list[tuple[str, str, str, str]] = [
-    # ── Rice ──
-    ("Rice",       "regular milled", "regular milled rice", "kg"),
-    ("Rice",       "well milled",    "well milled rice",    "kg"),
-    ("Rice",       "premium",        "premium rice",        "kg"),
-    ("Rice",       "special",        "special rice",        "kg"),
-    # ── Fish ──
-    ("Fish",       "bangus",         "bangus",              "kg"),
-    ("Fish",       "tilapia",        "tilapia",             "kg"),
-    ("Fish",       "galunggong",     "galunggong",          "kg"),
-    ("Fish",       "alumahan",       "alumahan mackerel",   "kg"),
-    ("Fish",       "tambakol",       "tuna",                "kg"),
-    ("Fish",       "squid",          "squid pusit",         "kg"),
-    # ── Pork ──
-    ("Pork",       "kasim",          "pork kasim",          "kg"),
-    ("Pork",       "liempo",         "pork liempo",         "kg"),
-    # ── Beef ──
-    ("Beef",       "brisket",        "beef brisket",        "kg"),
-    ("Beef",       "rump",           "beef rump",           "kg"),
-    # ── Chicken ──
-    ("Chicken",    "chicken",        "whole chicken",       "kg"),
-    # ── Vegetables ──
-    ("Vegetables", "ampalaya",       "ampalaya",            "kg"),
-    ("Vegetables", "tomato",         "tomato",              "kg"),
-    ("Vegetables", "sitao",          "sitaw",               "kg"),
-    ("Vegetables", "sitaw",          "sitaw",               "kg"),
-    ("Vegetables", "squash",         "squash kalabasa",     "kg"),
-    ("Vegetables", "pechay",         "pechay",              "kg"),
-    ("Vegetables", "carrot",         "carrots",             "kg"),
-    ("Vegetables", "potato",         "potato",              "kg"),
-    ("Vegetables", "cabbage",        "cabbage",             "kg"),
-    ("Vegetables", "red onion",      "red onion",           "kg"),
-    ("Vegetables", "white onion",    "white onion",         "kg"),
-    ("Vegetables", "garlic",         "garlic",              "kg"),
-    ("Vegetables", "ginger",         "ginger",              "kg"),
-    ("Vegetables", "eggplant",       "eggplant talong",     "kg"),
-    # ── Fruits ──
-    ("Fruits",     "lakatan",        "banana lacatan",      "kg"),
-    ("Fruits",     "latundan",       "banana latundan",     "kg"),
-    ("Fruits",     "saba",           "banana saba",         "kg"),
-    ("Fruits",     "papaya",         "papaya",              "kg"),
-    ("Fruits",     "mango",          "mango",               "kg"),
-    ("Fruits",     "calamansi",      "calamansi",           "kg"),
-    ("Fruits",     "watermelon",     "watermelon",          "kg"),
-    ("Fruits",     "melon",          "melon",               "kg"),
-    # ── Eggs ──
-    ("Eggs",       "egg",            "chicken egg",         "piece"),
-]
-
 
 def classify_product_category(name: str, fallback: str | None = None) -> str | None:
     """Re-derive a product's category from its name; fall back to the header
@@ -353,188 +287,15 @@ def parse_pdf(pdf_path: str) -> list[dict]:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-#  WalterMart Freshop price fetcher (Phase 2)
-# ═══════════════════════════════════════════════════════════════════════════════
-
-def _extract_kg_weight(name: str) -> float | None:
-    """Extract pack weight in kg from a product name, e.g. '5kg' → 5.0."""
-    m = re.search(r"(\d+\.?\d*)\s*kg", name, re.IGNORECASE)
-    return float(m.group(1)) if m else None
-
-
-def _extract_piece_count(name: str) -> int | None:
-    """Extract piece count from a pack name, e.g. '12s' → 12."""
-    m = re.search(r"(\d+)\s*(?:s\b|pcs?\.?|pieces?)", name, re.IGNORECASE)
-    count = int(m.group(1)) if m else None
-    return count if (count and count > 1) else None
-
-
-def _is_relevant(query: str, name: str) -> bool:
-    """Guard against the API returning an unrelated first result: require at
-    least one meaningful word from the query to appear in the product name."""
-    tokens = [w for w in re.split(r"\W+", query.lower()) if len(w) >= 3]
-    if not tokens:
-        return True
-    n = name.lower()
-    return any(tok in n for tok in tokens)
-
-
-def _absolute_url(url: str | None) -> str | None:
-    """Freshop returns full URLs today, but join defensively in case it ever
-    returns a bare path."""
-    if not url:
-        return None
-    return url if url.startswith("http") else urljoin(STORE_URL, url)
-
-
-def fetch_store_price(
-    session: requests.Session,
-    query: str,
-    target_unit: str,
-) -> tuple[float | None, str | None, str | None]:
-    """
-    Search the WalterMart Freshop API for a product and return a normalised
-    (price_per_unit, matched_product_name, canonical_url) tuple.
-
-    For kg items: returns price per kg (normalising 5 kg rice bags, etc.).
-    For piece items: returns price per piece (normalising 12-egg cartons, etc.).
-    Returns (None, None, None) when no suitable match is found.
-
-    API notes:
-    - Base: https://api.freshop.ncrcloud.com/1/products
-    - app_key is publicly embedded in the WalterMart site JS (allow_bots=true)
-    - Crawl-delay in robots.txt applies to their WP site, not this API domain
-    - We fetch only ~25 items, once a day → negligible traffic
-    """
-    # The Freshop API intermittently returns 4xx/5xx under bursty traffic, so
-    # retry a couple of times with a short backoff before giving up.
-    products = None
-    last_exc: Exception | None = None
-    for attempt in range(3):
-        try:
-            resp = session.get(
-                WALTER_MART_API,
-                params={"app_key": WALTER_MART_APP_KEY, "limit": 10, "q": query},
-                timeout=15,
-            )
-            resp.raise_for_status()
-            products = resp.json().get("items", [])
-            break
-        except Exception as exc:           # noqa: BLE001 — network/HTTP/JSON
-            last_exc = exc
-            if attempt < 2:
-                time.sleep(1.5 * (attempt + 1))
-    if products is None:
-        print(f"  [WalterMart] fetch error for '{query}': {last_exc}", file=sys.stderr)
-        return None, None, None
-
-    for product in products:
-        if product.get("status") != "available":
-            continue
-
-        name = product.get("name", "")
-        if not _is_relevant(query, name):
-            continue
-
-        size          = (product.get("size") or "").lower()
-        unit_price    = product.get("unit_price") or product.get("price")
-        canonical_url = _absolute_url(product.get("canonical_url"))
-        if not unit_price:
-            continue
-
-        # ── kg target ──
-        if target_unit == "kg":
-            if "kg" in size or "kilo" in size:
-                return float(unit_price), name, canonical_url
-            # Pack sold by piece/pack but weight is in the name (e.g. "5kg bag")
-            kg = _extract_kg_weight(name) or _extract_kg_weight(size)
-            if kg and kg > 0 and size in ("pc", "pack", "ea", "each", ""):
-                return round(float(unit_price) / kg, 2), name, canonical_url
-
-        # ── piece target ──
-        elif target_unit == "piece":
-            if size in ("pc", "pack", "piece", "ea", "each", ""):
-                count = _extract_piece_count(name)
-                if count:                              # multi-pack → normalise
-                    return round(float(unit_price) / count, 2), name, canonical_url
-                return float(unit_price), name, canonical_url  # already per-piece
-
-    return None, None, None
-
-
-def _find_matcher(item: dict) -> tuple[str, str] | None:
-    """Return (query, unit) for the first STORE_MATCHERS rule whose category and
-    keyword match this DA item, or None."""
-    category = item.get("category")
-    name     = item["product"].lower()
-    for m_cat, keyword, query, unit in STORE_MATCHERS:
-        if m_cat and m_cat != category:
-            continue
-        if keyword in name:
-            return query, unit
-    return None
-
-
-def add_store_prices(
-    session: requests.Session,
-    items: list[dict],
-    verbose: bool = True,
-) -> int:
-    """
-    Iterate over DA items, look up each in WalterMart, and add store fields
-    in-place.  Returns the number of items successfully matched. Identical
-    queries are cached so we hit the Freshop API at most once per query.
-    """
-    matched = 0
-    cache: dict[tuple[str, str], tuple] = {}
-    for item in items:
-        mapping = _find_matcher(item)
-        if not mapping:
-            continue
-
-        query, target_unit = mapping
-        cache_key = (query, target_unit)
-        if cache_key in cache:
-            store_price, store_product, store_url = cache[cache_key]
-        else:
-            store_price, store_product, store_url = fetch_store_price(session, query, target_unit)
-            cache[cache_key] = (store_price, store_product, store_url)
-            time.sleep(STORE_REQUEST_DELAY)   # only delay on real API calls
-
-        if store_price is not None:
-            diff_pct = round((store_price - item["price"]) / item["price"] * 100, 1)
-            item["store_name"]    = STORE_NAME
-            item["store_price"]   = store_price
-            item["store_product"] = store_product   # the actual WalterMart name
-            item["store_url"]     = store_url
-            item["diff_pct"]      = diff_pct
-            matched += 1
-            if verbose:
-                flag = "🔴" if diff_pct > 10 else ("🟢" if diff_pct < 0 else "  ")
-                print(
-                    f"  {flag} {item['product']:<30s} "
-                    f"DA ₱{item['price']:>7.2f}  WM ₱{store_price:>7.2f}  "
-                    f"({diff_pct:+.1f}%)"
-                )
-        else:
-            if verbose:
-                print(f"     {item['product']:<30s} — no WalterMart match")
-
-    return matched
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
 #  Main
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Fetch DA Daily Price Index and WalterMart prices, write prices.json."
+        description="Fetch the DA price bulletin and write prices.json."
     )
-    parser.add_argument("--dry-run",    action="store_true",
+    parser.add_argument("--dry-run", action="store_true",
                         help="Print result without writing prices.json.")
-    parser.add_argument("--skip-store", action="store_true",
-                        help="Skip WalterMart fetch (DA prices only).")
     parser.add_argument("--debug", action="store_true",
                         help="Dump raw PDF table/text structure and exit (read-only).")
     args = parser.parse_args()
@@ -582,13 +343,7 @@ def main() -> None:
         cats = len({i["category"] for i in items})
         print(f"  Parsed {len(items)} items across {cats} categories.")
 
-        # ── Step 4: add WalterMart store prices ──
-        if not args.skip_store:
-            print(f"\nFetching WalterMart prices ({len(STORE_MATCHERS)} matchers)…")
-            matched = add_store_prices(session, items)
-            print(f"\n  Matched {matched} item(s) to WalterMart products.\n")
-
-        # ── Step 5: build JSON payload ──
+        # ── Step 4: build JSON payload ──
         today   = datetime.now().strftime("%Y-%m-%d")
         now_iso = datetime.now().astimezone().isoformat(timespec="seconds")
 
@@ -596,8 +351,6 @@ def main() -> None:
             "date":       today,
             "source":     "DA Daily Price Index",
             "source_url": DA_LISTING_URL,
-            "store_name": STORE_NAME,
-            "store_url":  STORE_URL,
             "updated_at": now_iso,
             "items":      items,
         }
@@ -607,7 +360,7 @@ def main() -> None:
             print(json.dumps(payload, indent=2, ensure_ascii=False))
             return
 
-        # ── Step 6: write atomically ──
+        # ── Step 5: write atomically ──
         tmp_out = OUTPUT_FILE.with_suffix(".json.tmp")
         tmp_out.write_text(
             json.dumps(payload, indent=2, ensure_ascii=False),

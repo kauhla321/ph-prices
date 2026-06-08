@@ -56,15 +56,12 @@ python -m http.server 8000
         └── update.yml      GitHub Actions daily cron
 ```
 
-## Supermarket price comparison
+## Categorization
 
-`update.py` also looks up matched commodities on **WalterMart** (via the public
-Freshop API) and adds `store_price`, `store_product`, `store_url`, and `diff_pct`
-to each matched item. The page renders these as an extra column and links the
-store price straight to the actual product page on WalterMart.
+Categories are re-derived from each product's name (`PRODUCT_CATEGORY_RULES` in
+`update.py`) rather than the DA bulletin's section headers, which are unreliable
+to parse. Run `python update.py --debug` to dump the raw PDF table/text structure
+if the parser ever needs tuning.
 
-- Matching is keyword + category based (see `STORE_MATCHERS` in `update.py`), so
-  DA names like `Bangus, Large` or `Galunggong, Local` map correctly.
-- Categories are re-derived from the product name (`PRODUCT_CATEGORY_RULES`),
-  which is more reliable than the DA bulletin's section headers.
-- Run `python update.py --skip-store` to fetch DA prices only.
+> **Scope:** This site shows only the official DA figures — no third-party or
+> supermarket prices — to keep the data safe and accurate.

@@ -36,6 +36,6 @@ jobs:
             echo "prices.json unchanged — nothing to commit."
           else
             git add prices.json
-            git commit -m "chore: update prices $(date -u +%Y-%m-%d) (DA + WalterMart)"
+            git commit -m "chore: update DA prices $(date -u +%Y-%m-%d)"
             git push
           fi

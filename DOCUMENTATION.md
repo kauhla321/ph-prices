@@ -1,6 +1,12 @@
 # PH Daily Commodity Prices — Technical Documentation
 
-A zero-backend static site showing official Philippine Department of Agriculture (DA) commodity prices alongside WalterMart supermarket prices for comparison.
+A zero-backend static site showing official Philippine Department of Agriculture (DA) commodity prices.
+
+> **Note (current scope):** The supermarket (WalterMart) price-comparison layer
+> has been **removed** to keep the data safe and accurate — the site now shows
+> only the official DA figures. Sections below that describe the WalterMart
+> Freshop API, store price normalization, and the `store_*` / `diff_pct` fields
+> are retained for historical reference only and no longer reflect the code.
 
 ---
 

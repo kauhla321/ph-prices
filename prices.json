@@ -2,8 +2,6 @@
   "date": "2026-06-08",
   "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
-  "store_name": "WalterMart",
-  "store_url": "https://www.waltermartdelivery.com.ph/",
   "updated_at": "2026-06-08T02:51:10+00:00",
   "items": [
     {
@@ -34,45 +32,25 @@
       "category": "Rice",
       "product": "Other Special Rice",
       "price": 59.73,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 74.0,
-      "store_product": "Amparos Special Local White Maharlika | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/amparos_special_local_white_maharlika_kg/p/1564405684704749338",
-      "diff_pct": 23.9
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
       "price": 50.94,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 148.5,
-      "store_product": "Prime Organics Emperor's Premium Black Rice | 2kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/rice/prime_organics_emperor_s_premium_black_rice_2kg/p/1564405684704679526",
-      "diff_pct": 191.5
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
       "price": 48.01,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 65.45,
-      "store_product": "Everyday Well Milled Rice | 5kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/rice/everyday_well_milled_rice_5kg/p/1564405684707849064",
-      "diff_pct": 36.3
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
       "price": 42.5,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 48.0,
-      "store_product": "Rej Regular Milled Rice | 5kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/rej_regular_milled_rice_5kg/p/1764405684715117312",
-      "diff_pct": 12.9
+      "unit": "kg"
     },
     {
       "category": "Rice",
@@ -84,45 +62,25 @@
       "category": "Rice",
       "product": "Other Special Rice",
       "price": 60.16,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 74.0,
-      "store_product": "Amparos Special Local White Maharlika | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/amparos_special_local_white_maharlika_kg/p/1564405684704749338",
-      "diff_pct": 23.0
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
       "price": 54.78,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 148.5,
-      "store_product": "Prime Organics Emperor's Premium Black Rice | 2kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/rice/prime_organics_emperor_s_premium_black_rice_2kg/p/1564405684704679526",
-      "diff_pct": 171.1
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
       "price": 49.67,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 65.45,
-      "store_product": "Everyday Well Milled Rice | 5kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/food_pantry/rice_beans_grains/rice/everyday_well_milled_rice_5kg/p/1564405684707849064",
-      "diff_pct": 31.8
+      "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
       "price": 44.88,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 48.0,
-      "store_product": "Rej Regular Milled Rice | 5kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/rej_regular_milled_rice_5kg/p/1764405684715117312",
-      "diff_pct": 7.0
+      "unit": "kg"
     },
     {
       "category": "Corn",
@@ -176,34 +134,19 @@
       "category": "Fish",
       "product": "Bangus, Large",
       "price": 249.05,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 399.0,
-      "store_product": "Fishta Bangus Boneless | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/seafood/fishta_bangus_boneless_kg/p/1564405684704766597",
-      "diff_pct": 60.2
+      "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Medium",
       "price": 228.72,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 399.0,
-      "store_product": "Fishta Bangus Boneless | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/seafood/fishta_bangus_boneless_kg/p/1564405684704766597",
-      "diff_pct": 74.4
+      "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Galunggong, Local",
       "price": 244.15,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 425.0,
-      "store_product": "Fishta Galunggong Big | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/seafood/fishta_galunggong_big_kg/p/1564405684712058535",
-      "diff_pct": 74.1
+      "unit": "kg"
     },
     {
       "category": "Fish",
@@ -227,23 +170,13 @@
       "category": "Fish",
       "product": "Tilapia",
       "price": 154.27,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 159.0,
-      "store_product": "WalterMart Fresh Tilapia Large | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/seafood/walter_mart_fresh_tilapia_large_kg/p/1564405684711308314",
-      "diff_pct": 3.1
+      "unit": "kg"
     },
     {
       "category": "Beef",
       "product": "Beef Brisket, Local",
       "price": 444.82,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 470.0,
-      "store_product": "W Prime Meats Beef Brisket | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/beef/w_prime_meats_beef_brisket_kg/p/1564405684711913039",
-      "diff_pct": 5.7
+      "unit": "kg"
     },
     {
       "category": "Beef",
@@ -255,177 +188,97 @@
       "category": "Pork",
       "product": "Pork Belly (Liempo), Local",
       "price": 397.21,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 549.0,
-      "store_product": "Mrs. Garcia's Pork Liempo Kawali | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/pork/mrs_garcia_s_pork_liempo_kawali_kg/p/1564405684704764653",
-      "diff_pct": 38.2
+      "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Belly (Liempo), Imported",
       "price": 312.13,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 549.0,
-      "store_product": "Mrs. Garcia's Pork Liempo Kawali | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/pork/mrs_garcia_s_pork_liempo_kawali_kg/p/1564405684704764653",
-      "diff_pct": 75.9
+      "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Picnic Shoulder (Kasim), Local",
       "price": 344.11,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 264.0,
-      "store_product": "Everyday Pork Kasim | 3kgs Up",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/everyday_pork_kasim_3kgs_up/p/1564405684704997476",
-      "diff_pct": -23.3
+      "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Picnic Shoulder (Kasim), Imported",
       "price": 252.54,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 264.0,
-      "store_product": "Everyday Pork Kasim | 3kgs Up",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/everyday_pork_kasim_3kgs_up/p/1564405684704997476",
-      "diff_pct": 4.5
+      "unit": "kg"
     },
     {
       "category": "Chicken",
       "product": "Whole Chicken, Local",
       "price": 202.89,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 195.0,
-      "store_product": "Whole Chicken | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/meat_poultry_seafood/chicken/whole_chicken_kg/p/1564405684710183732",
-      "diff_pct": -3.9
+      "unit": "kg"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Pewee)",
       "price": 5.96,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 79.0
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Extra Small)",
       "price": 6.48,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 64.7
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Small)",
       "price": 7.23,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 47.6
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Medium)",
       "price": 7.97,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 33.9
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Large)",
       "price": 8.58,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 24.4
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Extra Large)",
       "price": 9.14,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 16.7
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Jumbo)",
       "price": 9.81,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": 8.8
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Medium)",
       "price": 10.96,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": -2.6
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Large)",
       "price": 12.31,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": -13.3
+      "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Extra Large)",
       "price": 11.57,
-      "unit": "piece",
-      "store_name": "WalterMart",
-      "store_price": 10.67,
-      "store_product": "EggSakto 2 in 1 White & Brown Eggs Medium | 12s",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/dairy_eggs/eggs/egg_sakto_2_in_1_white_brown_eggs_medium_12s/p/1564405684715004855",
-      "diff_pct": -7.8
+      "unit": "piece"
     },
     {
       "category": "Vegetables",
       "product": "Ampalaya",
       "price": 133.19,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 245.0,
-      "store_product": "Global Fresh Ampalaya Housebrand (Bitter Gourd) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_ampalaya_housebrand_bitter_gourd_kg/p/1564405684710183915",
-      "diff_pct": 83.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
@@ -437,56 +290,31 @@
       "category": "Vegetables",
       "product": "Eggplant",
       "price": 86.93,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 370.0,
-      "store_product": "Global Fresh Organic Talong (Eggplant) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/global_fresh_organic_talong_eggplant_kg/p/1564405684710183959",
-      "diff_pct": 325.6
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Native Pechay",
       "price": 101.46,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 50.0,
-      "store_product": "Global Fresh Pechay Baguio Housebrand (Wombok) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_pechay_baguio_housebrand_wombok_kg/p/1564405684710183919",
-      "diff_pct": -50.7
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Pole Sitao",
       "price": 120.51,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 250.0,
-      "store_product": "Dizon Farms Sitaw | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_sitaw_kg/p/1564405684710183817",
-      "diff_pct": 107.5
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Squash",
       "price": 63.57,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 95.0,
-      "store_product": "Global Fresh Kalabasa (Squash) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_kalabasa_squash_kg/p/1564405684710183821",
-      "diff_pct": 49.4
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Tomato",
       "price": 67.67,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 130.0,
-      "store_product": "Dizon Farms Native Tomato | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_native_tomato_kg/p/1564405684710183781",
-      "diff_pct": 92.1
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
@@ -516,45 +344,25 @@
       "category": "Vegetables",
       "product": "Cabbage (Rare Ball)",
       "price": 64.08,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 50.0,
-      "store_product": "Global Fresh Repolyo (Cabbage) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_repolyo_cabbage_kg/p/1564405684710183916",
-      "diff_pct": -22.0
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cabbage (Scorpio)",
       "price": 67.43,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 50.0,
-      "store_product": "Global Fresh Repolyo (Cabbage) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_repolyo_cabbage_kg/p/1564405684710183916",
-      "diff_pct": -25.8
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cabbage (Wonder Ball)",
       "price": 59.45,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 50.0,
-      "store_product": "Global Fresh Repolyo (Cabbage) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_repolyo_cabbage_kg/p/1564405684710183916",
-      "diff_pct": -15.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Carrots, Local",
       "price": 132.52,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 259.0,
-      "store_product": "Dizon Farms Carrots | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_carrots_kg/p/1564405684710183862",
-      "diff_pct": 95.4
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
@@ -578,12 +386,7 @@
       "category": "Vegetables",
       "product": "Pechay Baguio",
       "price": 77.42,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 50.0,
-      "store_product": "Global Fresh Pechay Baguio Housebrand (Wombok) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_pechay_baguio_housebrand_wombok_kg/p/1564405684710183919",
-      "diff_pct": -35.4
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
@@ -607,12 +410,7 @@
       "category": "Vegetables",
       "product": "White Potato, Local",
       "price": 102.99,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 149.0,
-      "store_product": "Dizon Farms Potato Marble | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_potato_marble_kg/p/1564405684710183778",
-      "diff_pct": 44.7
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
@@ -624,78 +422,43 @@
       "category": "Vegetables",
       "product": "Garlic, Native/Local",
       "price": 403.85,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 186.0,
-      "store_product": "Global Fresh Bawang (Garlic) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_bawang_garlic_kg/p/1564405684710183942",
-      "diff_pct": -53.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Garlic, Imported",
       "price": 146.22,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 186.0,
-      "store_product": "Global Fresh Bawang (Garlic) | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/global_fresh_bawang_garlic_kg/p/1564405684710183942",
-      "diff_pct": 27.2
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Ginger, Local",
       "price": 173.11,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 320.0,
-      "store_product": "Dizon Farms Ginger | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_ginger_kg/p/1564405684710183803",
-      "diff_pct": 84.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Red Onion, Local",
       "price": 104.07,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 125.0,
-      "store_product": "Dizon Farms Imported Red Onion | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/dizon_farms_imported_red_onion_kg/p/1564405684710183775",
-      "diff_pct": 20.1
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Red Onion, Imported",
       "price": 90.0,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 125.0,
-      "store_product": "Dizon Farms Imported Red Onion | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/dizon_farms_imported_red_onion_kg/p/1564405684710183775",
-      "diff_pct": 38.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "White Onion, Local",
       "price": 98.03,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 145.0,
-      "store_product": "Dizon Farms Native Onion White | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/dizon_farms_native_onion_white_kg/p/1564405684710183776",
-      "diff_pct": 47.9
+      "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "White Onion, Imported",
       "price": 103.0,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 145.0,
-      "store_product": "Dizon Farms Native Onion White | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/dizon_farms_native_onion_white_kg/p/1564405684710183776",
-      "diff_pct": 40.8
+      "unit": "kg"
     },
     {
       "category": "Fruits",
@@ -707,12 +470,7 @@
       "category": "Fruits",
       "product": "Banana (Lakatan)",
       "price": 98.44,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 160.0,
-      "store_product": "Dizon Farms Banana Lacatan | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_fruits/dizon_farms_banana_lacatan_kg/p/1564405684710183734",
-      "diff_pct": 62.5
+      "unit": "kg"
     },
     {
       "category": "Fruits",
@@ -724,56 +482,31 @@
       "category": "Fruits",
       "product": "Banana (Saba)",
       "price": 59.08,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 80.0,
-      "store_product": "Dizon Farms Saba | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_fruits/dizon_farms_saba_kg/p/1564405684710183761",
-      "diff_pct": 35.4
+      "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Calamansi",
       "price": 124.24,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 162.0,
-      "store_product": "Dizon Farms Calamansi | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_calamansi_kg/p/1564405684712075986",
-      "diff_pct": 30.4
+      "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Mango (Carabao)",
       "price": 145.99,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 200.0,
-      "store_product": "Dizon Farms Mango Sapadera | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_fruits/dizon_farms_mango_sapadera_kg/p/1564405684710183737",
-      "diff_pct": 37.0
+      "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Melon",
       "price": 102.34,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 170.0,
-      "store_product": "Dizon Farms Honeydew Melon | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_fruits/dizon_farms_honeydew_melon_kg/p/1564405684710183752",
-      "diff_pct": 66.1
+      "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Papaya",
       "price": 73.41,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 145.0,
-      "store_product": "Dizon Farms Papaya Green | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_vegetables/dizon_farms_papaya_green_kg/p/1564405684710183812",
-      "diff_pct": 97.5
+      "unit": "kg"
     },
     {
       "category": "Fruits",
@@ -785,12 +518,7 @@
       "category": "Fruits",
       "product": "Watermelon",
       "price": 75.16,
-      "unit": "kg",
-      "store_name": "WalterMart",
-      "store_price": 85.0,
-      "store_product": "Dizon Farms Watermelon Black Beauty | kg",
-      "store_url": "https://www.waltermartdelivery.com.ph/shop/shop_by_category/fresh_produce/fresh_fruits/dizon_farms_watermelon_black_beauty_kg/p/1564405684710183747",
-      "diff_pct": 13.1
+      "unit": "kg"
     },
     {
       "category": "Salt",
