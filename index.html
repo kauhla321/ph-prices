@@ -610,21 +610,53 @@
 
           if (item.store_price != null) {
             const priceText = formatPrice(item.store_price);
+            // Trim the trailing " | kg" / " | pc" unit suffix Freshop appends.
+            const cleanName = item.store_product
+              ? item.store_product.replace(/\s*\|\s*\S+\s*$/, '').trim()
+              : '';
+
             if (item.store_url) {
+              // Link straight to the actual product page on WalterMart, with the
+              // matched product name shown beneath the price.
               const a = document.createElement('a');
-              a.href = item.store_url;
+              a.href   = item.store_url;
               a.target = '_blank';
-              a.rel = 'noopener noreferrer';
-              a.textContent = priceText;
-              a.style.cssText = 'color:var(--text-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color 0.15s,text-decoration-color 0.15s;';
-              a.addEventListener('mouseenter', () => { a.style.color = 'var(--text)'; a.style.textDecorationColor = 'var(--muted)'; });
-              a.addEventListener('mouseleave', () => { a.style.color = 'var(--text-2)'; a.style.textDecorationColor = 'var(--border)'; });
+              a.rel    = 'noopener noreferrer';
+              a.style.cssText = 'display:inline-flex;flex-direction:column;align-items:flex-end;gap:1px;text-decoration:none;';
+              if (item.store_product) a.title = 'View on WalterMart: ' + item.store_product;
+
+              const priceSpan = document.createElement('span');
+              priceSpan.textContent = priceText;
+              priceSpan.style.cssText = 'color:var(--text-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color 0.15s,text-decoration-color 0.15s;';
+
+              a.appendChild(priceSpan);
+
+              if (cleanName) {
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = cleanName;
+                nameSpan.className = 'store-product-name';
+                nameSpan.style.cssText = 'font-size:0.6875rem;line-height:1.15;color:var(--muted);max-width:11rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color 0.15s;';
+                a.appendChild(nameSpan);
+              }
+
+              a.addEventListener('mouseenter', () => {
+                priceSpan.style.color = 'var(--text)';
+                priceSpan.style.textDecorationColor = 'var(--muted)';
+                const n = a.querySelector('.store-product-name');
+                if (n) n.style.color = 'var(--text-2)';
+              });
+              a.addEventListener('mouseleave', () => {
+                priceSpan.style.color = 'var(--text-2)';
+                priceSpan.style.textDecorationColor = 'var(--border)';
+                const n = a.querySelector('.store-product-name');
+                if (n) n.style.color = 'var(--muted)';
+              });
               tdStore.appendChild(a);
             } else {
               tdStore.textContent = priceText;
               tdStore.style.color = 'var(--text-2)';
+              if (item.store_product) tdStore.title = item.store_product;
             }
-            if (item.store_product) tdStore.title = item.store_product;
           } else {
             tdStore.textContent = '—';
             tdStore.style.color = 'var(--muted)';

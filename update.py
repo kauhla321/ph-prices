@@ -58,40 +58,103 @@ CATEGORY_MAP = {
     "lpg":         "LPG",
 }
 
-# ── WalterMart product mapping ────────────────────────────────────────────────
-# DA product name → (Freshop search query, expected DA unit)
-# The fetcher prefers products where Freshop's size field matches expected_unit.
-# For rice bags (sold as 5 kg packs) and egg cartons (sold as 12s),
-# the fetcher normalises the pack price to per-kg or per-piece automatically.
-PRODUCT_MAPPING: dict[str, tuple[str, str]] = {
+# ── Product-name → category rules ─────────────────────────────────────────────
+# The DA bulletin's section headers are unreliable to parse (they sometimes get
+# merged into a data row, which makes the previous category "stick" and mislabel
+# every row after it — e.g. vegetables ending up under "Eggs"). These rules
+# re-derive the category from the product name itself, which is far more robust.
+# Checked in order; the first keyword hit wins. "eggplant" is listed before the
+# Eggs rule on purpose so it isn't mistaken for an egg.
+PRODUCT_CATEGORY_RULES: list[tuple[str, tuple[str, ...]]] = [
+    ("Vegetables", ("eggplant", "talong")),                       # guard before Eggs
+    ("Eggs",       ("egg", "itlog", "balut")),
+    ("Rice",       ("rice", "bigas", "milled", "glutinous", "japonica",
+                    "jasponica", "basmati", "benteng", "sinandomeng", "dinorado")),
+    ("Corn",       ("corn", "mais")),
+    ("Fish",       ("bangus", "tilapia", "galunggong", "alumahan", "sardines",
+                    "tamban", "squid", "pusit", "tambakol", "tuna", "mackerel",
+                    "fish", "isda", "milkfish", "shrimp", "hipon")),
+    ("Pork",       ("pork", "kasim", "liempo", "baboy")),
+    ("Beef",       ("beef", "brisket", "camto", "baka")),
+    ("Chicken",    ("chicken", "manok")),
+    ("Fruits",     ("banana", "lakatan", "latundan", "saba", "mango", "papaya",
+                    "avocado", "calamansi", "melon", "pomelo", "watermelon",
+                    "pineapple", "orange", "apple", "grapes")),
+    ("Vegetables", ("pechay", "sitao", "sitaw", "squash", "kalabasa", "tomato",
+                    "ampalaya", "pepper", "broccoli", "cauliflower", "cabbage",
+                    "carrot", "celery", "chayote", "beans", "habichuelas",
+                    "lettuce", "potato", "chilli", "chili", "garlic", "ginger",
+                    "onion", "okra", "kangkong", "upo", "patola", "gabi",
+                    "camote", "mungbean", "monggo", "mongo", "munggo")),
+    ("Sugar",      ("sugar", "asukal")),
+    ("Cooking Oil", ("cooking oil", "mantika", "palm oil")),
+]
+
+# ── WalterMart store matchers ─────────────────────────────────────────────────
+# (category, keyword in DA product name, Freshop query, expected unit)
+# Matched by substring against the DA product name (scoped to a category so a
+# generic keyword like "premium" can't leak across sections), so DA names like
+# "Bangus, Large" or "Galunggong, Local" map correctly. Checked in order.
+# Rice bags (sold as 5 kg packs) and egg trays (sold as 12s) are normalised to
+# per-kg / per-piece automatically by fetch_store_price().
+STORE_MATCHERS: list[tuple[str, str, str, str]] = [
     # ── Rice ──
-    "Regular Milled Rice":    ("regular milled rice", "kg"),
-    "Well-Milled Rice":       ("well milled rice",    "kg"),
-    "Special Rice":           ("special rice",         "kg"),
-    # ── Pork ──
-    "Kasim":                  ("pork kasim",           "kg"),
-    "Liempo":                 ("pork sliced belly",    "kg"),
-    # ── Beef (DA tracks exactly two cuts) ──
-    "Beef Brisket":           ("beef brisket",         "kg"),
-    "Beef Rump (Camto)":      ("beef camto",           "kg"),
-    # ── Chicken ──
-    "Whole Chicken":          ("whole chicken",        "kg"),
+    ("Rice",       "regular milled", "regular milled rice", "kg"),
+    ("Rice",       "well milled",    "well milled rice",    "kg"),
+    ("Rice",       "premium",        "premium rice",        "kg"),
+    ("Rice",       "special",        "special rice",        "kg"),
     # ── Fish ──
-    "Bangus":                 ("bangus",               "kg"),
-    "Tilapia":                ("tilapia",              "kg"),
-    "Galunggong":             ("galunggong",           "kg"),
+    ("Fish",       "bangus",         "bangus",              "kg"),
+    ("Fish",       "tilapia",        "tilapia",             "kg"),
+    ("Fish",       "galunggong",     "galunggong",          "kg"),
+    ("Fish",       "alumahan",       "alumahan mackerel",   "kg"),
+    ("Fish",       "tambakol",       "tuna",                "kg"),
+    ("Fish",       "squid",          "squid pusit",         "kg"),
+    # ── Pork ──
+    ("Pork",       "kasim",          "pork kasim",          "kg"),
+    ("Pork",       "liempo",         "pork liempo",         "kg"),
+    # ── Beef ──
+    ("Beef",       "brisket",        "beef brisket",        "kg"),
+    ("Beef",       "camto",          "beef camto",          "kg"),
+    # ── Chicken ──
+    ("Chicken",    "chicken",        "whole chicken",       "kg"),
     # ── Vegetables ──
-    "Ampalaya":               ("ampalaya",             "kg"),
-    "Tomato":                 ("tomato",               "kg"),
-    "Sitaw":                  ("sitaw",                "kg"),
+    ("Vegetables", "ampalaya",       "ampalaya",            "kg"),
+    ("Vegetables", "tomato",         "tomato",              "kg"),
+    ("Vegetables", "sitao",          "sitaw",               "kg"),
+    ("Vegetables", "sitaw",          "sitaw",               "kg"),
+    ("Vegetables", "squash",         "squash kalabasa",     "kg"),
+    ("Vegetables", "pechay",         "pechay",              "kg"),
+    ("Vegetables", "carrot",         "carrots",             "kg"),
+    ("Vegetables", "potato",         "potato",              "kg"),
+    ("Vegetables", "cabbage",        "cabbage",             "kg"),
+    ("Vegetables", "red onion",      "red onion",           "kg"),
+    ("Vegetables", "white onion",    "white onion",         "kg"),
+    ("Vegetables", "garlic",         "garlic",              "kg"),
+    ("Vegetables", "ginger",         "ginger",              "kg"),
+    ("Vegetables", "eggplant",       "eggplant talong",     "kg"),
     # ── Fruits ──
-    "Banana (Lakatan)":       ("banana lacatan",       "kg"),
-    "Papaya":                 ("papaya",               "kg"),
-    "Mango (Carabao)":        ("mango",                "kg"),
+    ("Fruits",     "lakatan",        "banana lacatan",      "kg"),
+    ("Fruits",     "latundan",       "banana latundan",     "kg"),
+    ("Fruits",     "saba",           "banana saba",         "kg"),
+    ("Fruits",     "papaya",         "papaya",              "kg"),
+    ("Fruits",     "mango",          "mango",               "kg"),
+    ("Fruits",     "calamansi",      "calamansi",           "kg"),
+    ("Fruits",     "watermelon",     "watermelon",          "kg"),
+    ("Fruits",     "melon",          "melon",               "kg"),
     # ── Eggs ──
-    "Chicken Eggs (Medium)":  ("eggs medium",          "piece"),
-    "Chicken Eggs (Large)":   ("eggs large",           "piece"),
-}
+    ("Eggs",       "egg",            "chicken egg",         "piece"),
+]
+
+
+def classify_product_category(name: str, fallback: str | None = None) -> str | None:
+    """Re-derive a product's category from its name; fall back to the header
+    category when no rule matches (e.g. an item we don't have a keyword for)."""
+    t = name.lower()
+    for category, keywords in PRODUCT_CATEGORY_RULES:
+        if any(kw in t for kw in keywords):
+            return category
+    return fallback
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -155,8 +218,14 @@ def normalize_unit(text: str) -> str:
     return "kg"
 
 
+# Footnote/superscript markers the DA bulletin appends to some product names
+# (e.g. "P20 Benteng Bigas Meron Naᵃ"). Stripped from the trailing edge only.
+_FOOTNOTE_CHARS = "ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ⁰¹²³⁴⁵⁶⁷⁸⁹*†‡§¶"
+
+
 def clean_product_name(text: str) -> str:
-    return re.sub(r"\s+", " ", str(text)).strip()
+    s = re.sub(r"\s+", " ", str(text)).strip()
+    return s.rstrip(_FOOTNOTE_CHARS).rstrip()
 
 
 def _price_col(header_row: list) -> int | None:
@@ -234,9 +303,12 @@ def parse_pdf(pdf_path: str) -> list[dict]:
                     elif cells:
                         unit = normalize_unit(cells[-1]) or "kg"
                     if product and price is not None:
+                        clean_name = clean_product_name(product)
+                        # Trust the product name over the (fragile) header category.
+                        category = classify_product_category(clean_name, current_category)
                         items.append({
-                            "category": current_category,
-                            "product":  clean_product_name(product),
+                            "category": category,
+                            "product":  clean_name,
                             "price":    price,
                             "unit":     unit,
                         })
@@ -258,6 +330,24 @@ def _extract_piece_count(name: str) -> int | None:
     m = re.search(r"(\d+)\s*(?:s\b|pcs?\.?|pieces?)", name, re.IGNORECASE)
     count = int(m.group(1)) if m else None
     return count if (count and count > 1) else None
+
+
+def _is_relevant(query: str, name: str) -> bool:
+    """Guard against the API returning an unrelated first result: require at
+    least one meaningful word from the query to appear in the product name."""
+    tokens = [w for w in re.split(r"\W+", query.lower()) if len(w) >= 3]
+    if not tokens:
+        return True
+    n = name.lower()
+    return any(tok in n for tok in tokens)
+
+
+def _absolute_url(url: str | None) -> str | None:
+    """Freshop returns full URLs today, but join defensively in case it ever
+    returns a bare path."""
+    if not url:
+        return None
+    return url if url.startswith("http") else urljoin(STORE_URL, url)
 
 
 def fetch_store_price(
@@ -295,31 +385,47 @@ def fetch_store_price(
         if product.get("status") != "available":
             continue
 
-        name          = product.get("name", "")
+        name = product.get("name", "")
+        if not _is_relevant(query, name):
+            continue
+
         size          = (product.get("size") or "").lower()
-        unit_price    = product.get("unit_price")
-        canonical_url = product.get("canonical_url")
+        unit_price    = product.get("unit_price") or product.get("price")
+        canonical_url = _absolute_url(product.get("canonical_url"))
         if not unit_price:
             continue
 
         # ── kg target ──
         if target_unit == "kg":
-            if size == "kg":
+            if "kg" in size or "kilo" in size:
                 return float(unit_price), name, canonical_url
-            # Pack sold by piece but weight is in the name (e.g. "5kg bag")
-            kg = _extract_kg_weight(name)
-            if kg and kg > 0 and size in ("pc", "pack"):
+            # Pack sold by piece/pack but weight is in the name (e.g. "5kg bag")
+            kg = _extract_kg_weight(name) or _extract_kg_weight(size)
+            if kg and kg > 0 and size in ("pc", "pack", "ea", "each", ""):
                 return round(float(unit_price) / kg, 2), name, canonical_url
 
         # ── piece target ──
         elif target_unit == "piece":
-            if size in ("pc", "pack", "piece"):
+            if size in ("pc", "pack", "piece", "ea", "each", ""):
                 count = _extract_piece_count(name)
                 if count:                              # multi-pack → normalise
                     return round(float(unit_price) / count, 2), name, canonical_url
                 return float(unit_price), name, canonical_url  # already per-piece
 
     return None, None, None
+
+
+def _find_matcher(item: dict) -> tuple[str, str] | None:
+    """Return (query, unit) for the first STORE_MATCHERS rule whose category and
+    keyword match this DA item, or None."""
+    category = item.get("category")
+    name     = item["product"].lower()
+    for m_cat, keyword, query, unit in STORE_MATCHERS:
+        if m_cat and m_cat != category:
+            continue
+        if keyword in name:
+            return query, unit
+    return None
 
 
 def add_store_prices(
@@ -329,16 +435,24 @@ def add_store_prices(
 ) -> int:
     """
     Iterate over DA items, look up each in WalterMart, and add store fields
-    in-place.  Returns the number of items successfully matched.
+    in-place.  Returns the number of items successfully matched. Identical
+    queries are cached so we hit the Freshop API at most once per query.
     """
     matched = 0
+    cache: dict[tuple[str, str], tuple] = {}
     for item in items:
-        mapping = PRODUCT_MAPPING.get(item["product"])
+        mapping = _find_matcher(item)
         if not mapping:
             continue
 
         query, target_unit = mapping
-        store_price, store_product, store_url = fetch_store_price(session, query, target_unit)
+        cache_key = (query, target_unit)
+        if cache_key in cache:
+            store_price, store_product, store_url = cache[cache_key]
+        else:
+            store_price, store_product, store_url = fetch_store_price(session, query, target_unit)
+            cache[cache_key] = (store_price, store_product, store_url)
+            time.sleep(STORE_REQUEST_DELAY)   # only delay on real API calls
 
         if store_price is not None:
             diff_pct = round((store_price - item["price"]) / item["price"] * 100, 1)
@@ -358,8 +472,6 @@ def add_store_prices(
         else:
             if verbose:
                 print(f"     {item['product']:<30s} — no WalterMart match")
-
-        time.sleep(STORE_REQUEST_DELAY)
 
     return matched
 
@@ -419,9 +531,9 @@ def main() -> None:
 
         # ── Step 4: add WalterMart store prices ──
         if not args.skip_store:
-            print(f"\nFetching WalterMart prices ({len(PRODUCT_MAPPING)} mapped products)…")
+            print(f"\nFetching WalterMart prices ({len(STORE_MATCHERS)} matchers)…")
             matched = add_store_prices(session, items)
-            print(f"\n  Matched {matched}/{len(PRODUCT_MAPPING)} products.\n")
+            print(f"\n  Matched {matched} item(s) to WalterMart products.\n")
 
         # ── Step 5: build JSON payload ──
         today   = datetime.now().strftime("%Y-%m-%d")

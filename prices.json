@@ -8,7 +8,7 @@
   "items": [
     {
       "category": "Rice",
-      "product": "P20 Benteng Bigas Meron Naᵃ",
+      "product": "P20 Benteng Bigas Meron Na",
       "price": 20.0,
       "unit": "kg"
     },
@@ -73,7 +73,7 @@
       "unit": "kg"
     },
     {
-      "category": "Corn",
+      "category": "Vegetables",
       "product": "Mungbean",
       "price": 150.03,
       "unit": "kg"
@@ -149,25 +149,25 @@
       "unit": "kg"
     },
     {
-      "category": "Eggs",
+      "category": "Vegetables",
       "product": "Native Pechay",
       "price": 86.08,
       "unit": "kg"
     },
     {
-      "category": "Eggs",
+      "category": "Vegetables",
       "product": "Pole Sitao",
       "price": 117.26,
       "unit": "kg"
     },
     {
-      "category": "Eggs",
+      "category": "Vegetables",
       "product": "Squash",
       "price": 63.46,
       "unit": "kg"
     },
     {
-      "category": "Eggs",
+      "category": "Vegetables",
       "product": "Tomato",
       "price": 67.38,
       "unit": "kg",

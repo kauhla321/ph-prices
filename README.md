@@ -56,7 +56,15 @@ python -m http.server 8000
         └── update.yml      GitHub Actions daily cron
 ```
 
-## Phase 2 (not yet built)
+## Supermarket price comparison
 
-Supermarket price comparison — adding `store_price` and `diff_pct` columns.
-The `prices.json` schema and the renderer are already forward-compatible.
+`update.py` also looks up matched commodities on **WalterMart** (via the public
+Freshop API) and adds `store_price`, `store_product`, `store_url`, and `diff_pct`
+to each matched item. The page renders these as an extra column and links the
+store price straight to the actual product page on WalterMart.
+
+- Matching is keyword + category based (see `STORE_MATCHERS` in `update.py`), so
+  DA names like `Bangus, Large` or `Galunggong, Local` map correctly.
+- Categories are re-derived from the product name (`PRODUCT_CATEGORY_RULES`),
+  which is more reliable than the DA bulletin's section headers.
+- Run `python update.py --skip-store` to fetch DA prices only.
