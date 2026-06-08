@@ -116,7 +116,7 @@ STORE_MATCHERS: list[tuple[str, str, str, str]] = [
     ("Pork",       "liempo",         "pork liempo",         "kg"),
     # ── Beef ──
     ("Beef",       "brisket",        "beef brisket",        "kg"),
-    ("Beef",       "camto",          "beef camto",          "kg"),
+    ("Beef",       "rump",           "beef rump",           "kg"),
     # ── Chicken ──
     ("Chicken",    "chicken",        "whole chicken",       "kg"),
     # ── Vegetables ──
