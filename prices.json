@@ -1,8 +1,8 @@
 {
-  "date": "2026-08-15",
+  "date": "2026-08-17",
   "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
-  "updated_at": "2026-08-15T21:18:55+00:00",
+  "updated_at": "2026-08-17T21:23:18+00:00",
   "items": [
     {
       "category": "Rice",
@@ -13,559 +13,559 @@
     {
       "category": "Rice",
       "product": "Basmati",
-      "price": 192.4,
+      "price": 190.0,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 60.9,
+      "price": 61.1,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Japonica/Jasponica",
-      "price": 60.9,
+      "price": 60.87,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 59.78,
+      "price": 59.74,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 51.66,
+      "price": 51.82,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 47.82,
+      "price": 47.79,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 76.58,
+      "price": 77.81,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 59.72,
+      "price": 59.84,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 54.0,
+      "price": 54.08,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 48.41,
+      "price": 48.32,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
-      "price": 44.57,
+      "price": 44.55,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (White)",
-      "price": 92.28,
+      "price": 94.71,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (Yellow)",
-      "price": 83.59,
+      "price": 83.64,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (White, Food Grade)",
-      "price": 75.88,
+      "price": 71.39,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (Yellow, Food Grade)",
-      "price": 81.82,
+      "price": 75.45,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Cracked (Yellow, Feed Grade)",
-      "price": 45.44,
+      "price": 45.43,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (Feed Grade)",
-      "price": 45.44,
+      "price": 45.43,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Mungbean",
-      "price": 145.14,
+      "price": 146.71,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Alumahan (Indian Mackerel)",
-      "price": 350.56,
+      "price": 351.02,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Large",
-      "price": 264.92,
+      "price": 267.68,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Medium",
-      "price": 238.6,
+      "price": 240.67,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Galunggong, Local",
-      "price": 282.14,
+      "price": 309.17,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Sardines (Tamban)",
-      "price": 114.78,
+      "price": 130.47,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Squid (Pusit Bisaya), Local",
-      "price": 457.82,
+      "price": 469.64,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tambakol (Yellow-Fin Tuna), Local",
-      "price": 290.18,
+      "price": 306.06,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tilapia",
-      "price": 154.41,
+      "price": 154.7,
       "unit": "kg"
     },
     {
       "category": "Beef",
       "product": "Beef Brisket, Local",
-      "price": 439.53,
+      "price": 439.96,
       "unit": "kg"
     },
     {
       "category": "Beef",
       "product": "Beef Rump, Local",
-      "price": 493.05,
+      "price": 493.32,
       "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Belly (Liempo), Local",
-      "price": 380.58,
+      "price": 380.26,
       "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Belly (Liempo), Imported",
-      "price": 306.56,
+      "price": 307.1,
       "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Picnic Shoulder (Kasim), Local",
-      "price": 327.25,
+      "price": 326.29,
       "unit": "kg"
     },
     {
       "category": "Pork",
       "product": "Pork Picnic Shoulder (Kasim), Imported",
-      "price": 241.23,
+      "price": 240.81,
       "unit": "kg"
     },
     {
       "category": "Chicken",
       "product": "Whole Chicken, Local",
-      "price": 200.86,
+      "price": 199.76,
       "unit": "kg"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Pewee)",
-      "price": 6.08,
+      "price": 6.15,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Extra Small)",
-      "price": 6.62,
+      "price": 6.65,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Small)",
-      "price": 7.2,
+      "price": 7.21,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Medium)",
-      "price": 7.95,
+      "price": 7.96,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Large)",
-      "price": 8.62,
+      "price": 8.61,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Extra Large)",
-      "price": 9.28,
+      "price": 9.27,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (White, Jumbo)",
-      "price": 9.95,
+      "price": 9.97,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Medium)",
-      "price": 10.48,
+      "price": 10.42,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Large)",
-      "price": 10.84,
+      "price": 11.3,
       "unit": "piece"
     },
     {
       "category": "Eggs",
       "product": "Chicken Egg (Brown, Extra Large)",
-      "price": 10.83,
+      "price": 10.84,
       "unit": "piece"
     },
     {
       "category": "Vegetables",
       "product": "Ampalaya",
-      "price": 98.4,
+      "price": 134.74,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Chilli (Green), Local",
-      "price": 124.21,
+      "price": 142.93,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Eggplant",
-      "price": 110.28,
+      "price": 137.34,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Native Pechay",
-      "price": 101.91,
+      "price": 154.01,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Pole Sitao",
-      "price": 114.66,
+      "price": 150.46,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Squash",
-      "price": 64.92,
+      "price": 67.06,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Tomato",
-      "price": 107.92,
+      "price": 115.89,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Bell Pepper (Green), Local",
-      "price": 230.94,
+      "price": 255.12,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Bell Pepper (Red), Local",
-      "price": 213.38,
+      "price": 232.08,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Broccoli, Local",
-      "price": 230.4,
+      "price": 248.54,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cauliflower, Local",
-      "price": 203.55,
+      "price": 244.17,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cabbage (Rare Ball)",
-      "price": 74.43,
+      "price": 99.64,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cabbage (Scorpio)",
-      "price": 85.99,
+      "price": 94.6,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Cabbage (Wonder Ball)",
-      "price": 69.72,
+      "price": 98.75,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Carrots, Local",
-      "price": 104.87,
+      "price": 113.73,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Celery",
-      "price": 149.27,
+      "price": 180.05,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Chayote",
-      "price": 53.31,
+      "price": 64.51,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Habichuelas/Baguio Beans, Local",
-      "price": 124.94,
+      "price": 157.36,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Pechay Baguio",
-      "price": 79.32,
+      "price": 99.76,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Lettuce (Green Ice)",
-      "price": 174.73,
+      "price": 257.93,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Lettuce (Iceberg)",
-      "price": 185.03,
+      "price": 263.99,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Lettuce (Romaine)",
-      "price": 186.87,
+      "price": 253.35,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "White Potato, Local",
-      "price": 125.25,
+      "price": 147.91,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Chilli (Red), Local",
-      "price": 161.65,
+      "price": 186.59,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Garlic, Native/Local",
-      "price": 355.61,
+      "price": 352.0,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Garlic, Imported",
-      "price": 148.15,
+      "price": 148.58,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Ginger, Local",
-      "price": 176.74,
+      "price": 180.75,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Red Onion, Local",
-      "price": 106.99,
+      "price": 109.79,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Red Onion, Imported",
-      "price": 88.57,
+      "price": 88.33,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "White Onion, Local",
-      "price": 104.37,
+      "price": 112.9,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "White Onion, Imported",
-      "price": 129.5,
+      "price": 135.71,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Avocado",
-      "price": 178.95,
+      "price": 182.92,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Banana (Lakatan)",
-      "price": 96.57,
+      "price": 96.81,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Banana (Latundan)",
-      "price": 76.36,
+      "price": 76.41,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Banana (Saba)",
-      "price": 62.54,
+      "price": 63.19,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Calamansi",
-      "price": 126.13,
+      "price": 124.93,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Mango (Carabao)",
-      "price": 167.75,
+      "price": 178.68,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Melon",
-      "price": 100.54,
+      "price": 101.13,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Papaya",
-      "price": 77.61,
+      "price": 77.55,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Pomelo",
-      "price": 174.69,
+      "price": 174.08,
       "unit": "kg"
     },
     {
       "category": "Fruits",
       "product": "Watermelon",
-      "price": 77.11,
+      "price": 77.07,
       "unit": "kg"
     },
     {
       "category": "Salt",
       "product": "Salt (Rock)",
-      "price": 21.91,
+      "price": 21.94,
       "unit": "kg"
     },
     {
       "category": "Salt",
       "product": "Salt (Iodized)",
-      "price": 42.83,
+      "price": 42.27,
       "unit": "kg"
     },
     {
       "category": "Sugar",
       "product": "Sugar (Refined)",
-      "price": 81.57,
+      "price": 81.59,
       "unit": "kg"
     },
     {
       "category": "Sugar",
       "product": "Sugar (Washed)",
-      "price": 74.43,
+      "price": 74.46,
       "unit": "kg"
     },
     {
       "category": "Sugar",
       "product": "Sugar (Brown)",
-      "price": 72.22,
+      "price": 72.28,
       "unit": "kg"
     },
     {
       "category": "Cooking Oil",
       "product": "Cooking Oil (Palm)",
-      "price": 39.58,
+      "price": 39.65,
       "unit": "liter"
     },
     {
       "category": "Cooking Oil",
       "product": "Cooking Oil (Palm)",
-      "price": 100.11,
+      "price": 99.45,
       "unit": "liter"
     },
     {
       "category": "Cooking Oil",
       "product": "Cooking Oil (Coconut)",
-      "price": 60.91,
+      "price": 60.77,
       "unit": "liter"
     },
     {
       "category": "Cooking Oil",
       "product": "Cooking Oil (Coconut)",
-      "price": 156.28,
+      "price": 155.48,
       "unit": "liter"
     }
   ]
