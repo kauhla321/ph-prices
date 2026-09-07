@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-05",
+  "date": "2026-09-07",
   "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
-  "updated_at": "2026-09-05T22:38:23+00:00",
+  "updated_at": "2026-09-07T23:16:28+00:00",
   "items": [
     {
       "category": "Rice",
@@ -19,91 +19,91 @@
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 61.07,
+      "price": 61.05,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Japonica/Jasponica",
-      "price": 60.54,
+      "price": 60.46,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 59.66,
+      "price": 59.54,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 52.76,
+      "price": 53.29,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 47.73,
+      "price": 47.71,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
-      "price": 45.28,
+      "price": 45.22,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 76.93,
+      "price": 76.82,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 59.97,
+      "price": 60.1,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 54.12,
+      "price": 54.1,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 48.53,
+      "price": 48.6,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
-      "price": 44.94,
+      "price": 45.02,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (White)",
-      "price": 100.05,
+      "price": 104.53,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (Yellow)",
-      "price": 84.44,
+      "price": 89.95,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (White, Food Grade)",
-      "price": 75.88,
+      "price": 74.44,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (Yellow, Food Grade)",
-      "price": 81.82,
+      "price": 79.17,
       "unit": "kg"
     },
     {
@@ -121,55 +121,55 @@
     {
       "category": "Vegetables",
       "product": "Mungbean",
-      "price": 147.77,
+      "price": 148.31,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Alumahan (Indian Mackerel)",
-      "price": 348.52,
+      "price": 365.13,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Large",
-      "price": 268.64,
+      "price": 270.4,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Medium",
-      "price": 242.19,
+      "price": 243.62,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Galunggong, Local",
-      "price": 314.83,
+      "price": 322.56,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Sardines (Tamban)",
-      "price": 125.26,
+      "price": 140.6,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Squid (Pusit Bisaya), Local",
-      "price": 464.87,
+      "price": 468.41,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tambakol (Yellow-Fin Tuna), Local",
-      "price": 318.22,
+      "price": 320.52,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tilapia",
-      "price": 155.34,
+      "price": 156.88,
       "unit": "kg"
     }
   ]
