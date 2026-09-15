@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-14",
+  "date": "2026-09-15",
   "source": "DA Daily Price Index",
   "source_url": "https://www.da.gov.ph/price-monitoring/",
-  "updated_at": "2026-09-14T23:41:06+00:00",
+  "updated_at": "2026-09-15T23:23:41+00:00",
   "items": [
     {
       "category": "Rice",
@@ -13,91 +13,97 @@
     {
       "category": "Rice",
       "product": "Basmati",
-      "price": 196.15,
+      "price": 190.0,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 61.05,
+      "price": 61.07,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Japonica/Jasponica",
-      "price": 60.46,
+      "price": 60.51,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 59.54,
+      "price": 59.49,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 53.29,
+      "price": 53.55,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 47.71,
+      "price": 48.0,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
-      "price": 45.22,
+      "price": 45.25,
+      "unit": "kg"
+    },
+    {
+      "category": "Rice",
+      "product": "Basmati",
+      "price": 150.0,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Glutinous",
-      "price": 76.82,
+      "price": 77.54,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Other Special Rice",
-      "price": 60.1,
+      "price": 60.16,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Premium",
-      "price": 54.1,
+      "price": 54.16,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Well Milled",
-      "price": 48.6,
+      "price": 48.78,
       "unit": "kg"
     },
     {
       "category": "Rice",
       "product": "Regular Milled",
-      "price": 45.02,
+      "price": 44.72,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (White)",
-      "price": 104.53,
+      "price": 111.9,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn (Yellow)",
-      "price": 89.95,
+      "price": 97.03,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (White, Food Grade)",
-      "price": 74.44,
+      "price": 79.17,
       "unit": "kg"
     },
     {
@@ -109,67 +115,67 @@
     {
       "category": "Corn",
       "product": "Corn Cracked (Yellow, Feed Grade)",
-      "price": 45.41,
+      "price": 45.73,
       "unit": "kg"
     },
     {
       "category": "Corn",
       "product": "Corn Grits (Feed Grade)",
-      "price": 45.41,
+      "price": 45.73,
       "unit": "kg"
     },
     {
       "category": "Vegetables",
       "product": "Mungbean",
-      "price": 148.31,
+      "price": 149.0,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Alumahan (Indian Mackerel)",
-      "price": 365.13,
+      "price": 353.67,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Large",
-      "price": 270.4,
+      "price": 271.33,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Bangus, Medium",
-      "price": 243.62,
+      "price": 244.95,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Galunggong, Local",
-      "price": 322.56,
+      "price": 310.79,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Sardines (Tamban)",
-      "price": 140.6,
+      "price": 153.24,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Squid (Pusit Bisaya), Local",
-      "price": 468.41,
+      "price": 472.54,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tambakol (Yellow-Fin Tuna), Local",
-      "price": 320.52,
+      "price": 312.57,
       "unit": "kg"
     },
     {
       "category": "Fish",
       "product": "Tilapia",
-      "price": 156.88,
+      "price": 158.35,
       "unit": "kg"
     }
   ]
